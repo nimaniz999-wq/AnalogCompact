@@ -1,0 +1,205 @@
+<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>قاب</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600&display=swap" media="print" onload="this.media='all'">
+<style>
+:root{--bg:#14181c;--card:#1b222a;--ink:#d8e0e8;--mut:#8899aa;--line:#2f3b47;--acc:#00e054;--y:#ff8000;--t:#40bcf4;--g:#00e054;--sh:#000;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.7 Vazirmatn,Tahoma,sans-serif}#app{max-width:1040px;margin:auto;padding:0 14px 30px}
+.nv{display:flex;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid var(--line);margin-bottom:18px}.lg{display:flex;direction:ltr}.lg i{width:18px;height:18px;border-radius:50%;margin-inline-end:-6px;display:block}.lg i:nth-child(1){background:#ff8000}.lg i:nth-child(2){background:#00e054}.lg i:nth-child(3){background:#40bcf4}
+.nv b{font-size:24px;font-weight:600;color:#fff;margin-inline-start:6px}
+h1{font-size:28px;font-weight:600;color:#fff;margin:2px 0}h2{font-size:12.5px;font-weight:600;color:var(--mut);letter-spacing:.06em;margin:0 0 10px;padding-bottom:5px;border-bottom:1px solid var(--line)}small,.m{color:var(--mut);font-size:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px;margin-bottom:14px}
+input,textarea,select{width:100%;font:inherit;color:#fff;background:#2c3440;border:1px solid transparent;border-radius:3px;padding:5px 9px}input:focus,textarea:focus,select:focus{outline:0;background:#fff;color:#14181c}textarea{resize:vertical;min-height:38px}
+input[type=checkbox]{width:auto;accent-color:var(--acc);transform:scale(1.2)}input[type=file]{background:none;padding:4px 0}
+button{font:inherit;font-size:13px;cursor:pointer;color:#d8e0e8;background:#445566;border:0;border-radius:3px;padding:4px 14px}button:hover{background:#556677;color:#fff}
+button.pri{background:var(--acc);color:#14181c;font-weight:600}button.pri:hover{background:#00c040;color:#14181c}button.x{color:#ff8000;background:none}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.row>input{flex:1;min-width:140px}.row>select{width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}label{font-size:12px;color:var(--mut);display:block}
+.tabs{display:flex;gap:22px;margin:4px 0 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}.tabs button{background:none;color:var(--mut);padding:8px 0;border-radius:0;font-weight:600;font-size:13px;border-bottom:3px solid transparent}.tabs button:hover{color:#fff}.tabs .on{color:#fff;border-bottom-color:var(--acc)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.chips button{background:#2c3440;font-size:12px}.chips .on{background:var(--acc);color:#14181c}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:14px;margin-bottom:14px}.pt{border:1px solid #445566;border-radius:3px;aspect-ratio:2/3;overflow:hidden;position:relative;background:#2c3440;cursor:pointer;display:flex;align-items:flex-end;padding:8px;font-weight:600;color:#fff}.pt:hover{border-color:var(--acc)}.pt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.pt span{position:relative;background:#14181ccc;padding:1px 6px;border-radius:3px}
+.poster{width:150px;aspect-ratio:2/3;object-fit:cover;border-radius:3px;border:1px solid #445566;display:block;margin-bottom:6px}
+.tree,.tree ul{list-style:none;margin:0;padding:0}.tree ul{margin-inline-start:22px;border-inline-start:1px solid #445566;padding-inline-start:12px}.tree li{margin:8px 0}
+.nd{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:8px;display:grid;gap:6px}.nd .t{font-weight:600}.bt{display:flex;gap:6px}.bt button{font-size:12px;padding:0 10px}
+.it{border:1px solid var(--line);border-inline-start-width:4px;border-radius:4px;padding:10px;margin-bottom:10px;display:grid;gap:6px;background:var(--bg)}
+.tm{display:flex;gap:6px;align-items:center;flex-wrap:wrap}.tm input[type=time]{width:105px}.tm select{width:auto}
+.tl{position:relative;height:26px;background:var(--bg);border:1px solid var(--line);border-radius:4px;overflow:hidden}.tl i{position:absolute;top:3px;bottom:3px;border-radius:2px}
+.tk{display:flex;justify-content:space-between;font-size:11px;color:var(--mut);margin:2px 2px 12px}
+.wg{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:8px}.wc{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:6px;display:grid;gap:6px;align-content:start}
+.wk{display:flex;gap:6px;align-items:center;margin-bottom:6px}.wc .wk{align-items:flex-start;flex-wrap:wrap}.star{font-size:20px;background:none!important;padding:0 4px;color:var(--mut)}.star.on{color:var(--acc)}
+.nav{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}.nav b{flex:1;text-align:center;font-size:16px;font-weight:600;color:#fff}.jp{display:flex;gap:4px}.jp input{width:64px}.jp select{width:96px}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:12px;text-align:center}.cal .h0{font-size:12px;color:var(--mut)}.cd{border:1px solid var(--line);border-radius:3px;padding:6px 0;cursor:pointer;background:var(--bg);position:relative}.cd:hover{border-color:var(--acc)}.cd.on{background:var(--acc);color:#14181c;font-weight:600}.cd em{position:absolute;top:1px;left:4px;font-size:10px;font-style:normal;color:var(--y)}
+.fr{display:grid;grid-template-columns:1.2fr 2fr 1fr auto;gap:6px;margin-bottom:6px}.sum{font-size:18px;font-weight:600;text-align:center;padding:14px;border:1px solid var(--acc);border-radius:4px;background:var(--card);color:var(--acc)}
+.ch{display:grid;gap:6px}.cr{display:grid;grid-template-columns:110px 1fr 70px;gap:8px;align-items:center;font-size:13px}.cb{height:10px;background:var(--bg);border-radius:5px;overflow:hidden}.cb i{display:block;height:100%}
+.mg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}.mi{border:1px solid var(--line);border-radius:4px;padding:6px;background:var(--bg);font-size:12px}.mi img,.mi video{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px}.mi p{margin:4px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ic{aspect-ratio:4/3;display:grid;place-items:center;background:var(--card);border-radius:3px;font-weight:600;color:var(--mut)}
+#toast{display:none;position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--acc);color:#14181c;font-weight:600;padding:8px 18px;border-radius:3px;z-index:9}
+.rp{--ink:#14181c;--card:#fff;--bg:#fff;--line:#14181c;--mut:#556677;position:absolute;left:-99999px;top:0;background:#fff;color:#14181c;padding:6px;direction:rtl;font-size:13px}
+.rp h1{color:#14181c;font-size:26px}.rp h2{color:#14181c;font-size:15px;letter-spacing:0;margin:14px 0 6px;border-bottom:2px solid #00b844;display:inline-block}.rp p{margin:0 0 8px}.rb{display:flex;height:8px}.rb i{flex:1}.rb i:nth-child(1){background:#ff8000}.rb i:nth-child(2){background:#00b844}.rb i:nth-child(3){background:#40bcf4}.rb i:nth-child(4){background:#556677}
+.rt{width:100%;border-collapse:collapse;margin:6px 0}.rt th{background:#e5ebf0;text-align:right}.rt th,.rt td{border:1px solid #b8c4cf;padding:4px 7px;vertical-align:top}.rt tr:nth-child(even) td{background:#f4f7f9}
+.oc{direction:ltr;overflow-x:auto;padding:8px 0 16px}.oc ul{padding-top:22px;position:relative;display:flex;justify-content:center;margin:0;padding-left:0;padding-right:0;list-style:none}.oc>ul{padding-top:0}
+.oc li{position:relative;padding:22px 7px 0;display:flex;flex-direction:column;align-items:center;list-style:none}.oc>ul>li{padding-top:0}
+.oc li::before,.oc li::after{content:'';position:absolute;top:0;right:50%;border-top:2px solid #4a5a6a;width:50%;height:22px}.oc li::after{right:auto;left:50%;border-left:2px solid #4a5a6a}
+.oc li:only-child::before,.oc li:only-child::after{display:none}.oc>ul>li::before,.oc>ul>li::after{display:none}.oc li:first-child::before,.oc li:last-child::after{border:0 none}
+.oc li:last-child::before{border-right:2px solid #4a5a6a;border-radius:0 6px 0 0}.oc li:first-child::after{border-radius:6px 0 0 0}.oc ul ul::before{content:'';position:absolute;top:0;left:50%;border-left:2px solid #4a5a6a;width:0;height:22px}
+.bx{direction:rtl;min-width:120px;max-width:170px;background:var(--card);border:1px solid #445566;border-top-width:4px;border-radius:4px;padding:6px 10px;text-align:center}.bx b{display:block;color:var(--ink);font-size:13px}.bx span{display:block;font-size:12px;color:var(--mut);line-height:1.5}
+.bx.d0{background:#00e054;border-color:#00e054}.bx.d0 b,.bx.d0 span{color:#14181c}.bx.d1{border-top-color:#ff8000}.bx.d2{border-top-color:#40bcf4}
+.rp .oc{overflow:visible}.rp .bx{min-width:70px;max-width:92px;font-size:10px;padding:3px 4px}.rp .bx b{font-size:11px}.rp .bx span{font-size:10px}.rp .oc li{padding-left:4px;padding-right:4px}
+#sp{position:fixed;inset:0;background:#14181c;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s;cursor:pointer}#sp.out{opacity:0;pointer-events:none}#sp svg{width:min(340px,84vw);height:auto;overflow:visible}
+.ic{opacity:0;transform:translate(var(--x),var(--y)) scale(.2) rotate(-25deg);transition:transform .55s cubic-bezier(.3,1.6,.5,1),opacity .3s}.ic.in{opacity:1;transform:translate(var(--x),var(--y)) scale(1) rotate(0)}
+#sp.merge .ic{opacity:0;transform:translate(0,0) scale(.15) rotate(90deg);transition:transform .7s ease-in,opacity .6s ease-in .1s}
+.lgo{opacity:0;transform:scale(.7);transition:opacity .2s,transform .6s cubic-bezier(.3,1.5,.5,1)}#sp.logo .lgo{opacity:1;transform:scale(1)}
+.br{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .6s ease}#sp.logo .br{stroke-dashoffset:0}.tri{opacity:0;transition:opacity .4s .5s}#sp.logo .tri{opacity:1}
+#sp .nm{font-size:44px;font-weight:600;color:#fff;opacity:0;transform:translateY(8px);transition:all .5s}#sp .sb{color:#8899aa;font-size:13px;opacity:0;transition:opacity .5s .2s}#sp.name .nm{opacity:1;transform:none}#sp.name .sb{opacity:1}
+#sp .sk{position:absolute;bottom:calc(20px + env(safe-area-inset-bottom,0px));color:#556677;font-size:12px}
+@media(max-width:560px){.fr{grid-template-columns:1fr 1fr}}
+</style></head><body><div id="sp"><svg viewBox="-160 -120 320 240" aria-hidden="true">
+<g class="ic" id="i1" style="--x:-90px;--y:-52px"><path d="M-27 -8L-23 -22L27 -14V-8Z" fill="#ff8000" stroke="#ff8000" stroke-width="3" stroke-linejoin="round"/><path d="M-14 -9L-10 -19M-2 -9L2 -17M10 -9L14 -15" stroke="#14181c" stroke-width="3" stroke-linecap="round"/><rect x="-26" y="-4" width="52" height="30" rx="4" fill="none" stroke="#ff8000" stroke-width="3"/></g>
+<g class="ic" id="i2" style="--x:90px;--y:-52px" fill="none" stroke="#00e054" stroke-width="3" stroke-linecap="round"><rect x="-28" y="-16" width="56" height="32" rx="4"/><circle r="7"/><circle cx="-19" cy="0" r="1.5" fill="#00e054"/><circle cx="19" cy="0" r="1.5" fill="#00e054"/></g>
+<g class="ic" id="i3" style="--x:-90px;--y:52px" fill="none" stroke="#40bcf4" stroke-width="3" stroke-linecap="round"><rect x="-24" y="-20" width="48" height="44" rx="5"/><path d="M-24 -7H24M-11 -27V-16M11 -27V-16"/><g fill="#40bcf4" stroke="none"><rect x="-16" y="0" width="8" height="6" rx="1"/><rect x="-4" y="0" width="8" height="6" rx="1"/><rect x="8" y="0" width="8" height="6" rx="1"/><rect x="-16" y="11" width="8" height="6" rx="1"/><rect x="-4" y="11" width="8" height="6" rx="1"/></g></g>
+<g class="ic" id="i4" style="--x:90px;--y:52px" fill="none" stroke="#d8e0e8" stroke-width="3"><circle r="24"/><circle cx="0" cy="-12" r="5"/><circle cx="0" cy="12" r="5"/><circle cx="-12" cy="0" r="5"/><circle cx="12" cy="0" r="5"/><circle r="2.5" fill="#d8e0e8"/></g>
+<g class="lgo"><g transform="scale(4.4) translate(-14 -14)"><g fill="none" stroke="#00e054" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="br" pathLength="1" d="M3 9V5a2 2 0 0 1 2-2h4"/><path class="br" pathLength="1" d="M19 3h4a2 2 0 0 1 2 2v4"/><path class="br" pathLength="1" d="M25 19v4a2 2 0 0 1-2 2h-4"/><path class="br" pathLength="1" d="M9 25H5a2 2 0 0 1-2-2v-4"/></g><path class="tri" d="M11.5 9.8v8.4l7-4.2z" fill="#ff8000"/></g></g></svg>
+<div class="nm">قاب</div><div class="sb">برنامه‌ریزی و مستندسازی فیلم‌سازی</div><div class="sk">برای ورود لمس کنید</div></div>
+<div id="app"></div><div id="toast"></div>
+<script src="lib/html-to-image.js"></script><script src="lib/export-shim.js"></script><script src="lib/jszip.min.js"></script><script>
+const $=s=>document.querySelector(s),uid=()=>Math.random().toString(36).slice(2,9);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const pd=s=>new Date(s+'T12:00:00'),add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const fd=n=>Number(n).toLocaleString('fa-IR',{useGrouping:false}),nf=n=>Number(n||0).toLocaleString('fa-IR');
+const MN=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'],WD=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'],WS=['ش','ی','د','س','چ','پ','ج'];
+function g2j(gy,gm,gd){const g=[0,31,59,90,120,151,181,212,243,273,304,334],y2=gm>2?gy+1:gy;let d=355666+365*gy+~~((y2+3)/4)-~~((y2+99)/100)+~~((y2+399)/400)+gd+g[gm-1],jy=-1595+33*~~(d/12053);d%=12053;jy+=4*~~(d/1461);d%=1461;if(d>365){jy+=~~((d-1)/365);d=(d-1)%365}return[jy,d<186?1+~~(d/31):7+~~((d-186)/30),1+(d<186?d%31:(d-186)%30)]}
+function j2g(jy,jm,jd){jy+=1595;let d=-355668+365*jy+~~(jy/33)*8+~~((jy%33+3)/4)+jd+(jm<7?(jm-1)*31:(jm-7)*30+186),gy=400*~~(d/146097);d%=146097;if(d>36524){gy+=100*~~(--d/36524);d%=36524;if(d>=365)d++}gy+=4*~~(d/1461);d%=1461;if(d>365){gy+=~~((d-1)/365);d=(d-1)%365}let gd=d+1;const s=[0,31,(gy%4==0&&gy%100!=0)||gy%400==0?29:28,31,30,31,30,31,31,30,31,30,31];let gm=0;while(gm<13&&gd>s[gm]){gd-=s[gm];gm++}return[gy,gm,gd]}
+const jdt=d=>g2j(d.getFullYear(),d.getMonth()+1,d.getDate()),J=(y,m,d)=>{const g=j2g(y,m,d);return new Date(g[0],g[1]-1,g[2],12)};
+const mdays=(y,m)=>Math.round(((m==12?J(y+1,1,1):J(y,m+1,1))-J(y,m,1))/864e5);
+const wi=d=>(d.getDay()+1)%7,ws=d=>add(d,-wi(d)),dl=k=>{const d=pd(k),[y,m,x]=jdt(d);return `${WD[wi(d)]} ${fd(x)} ${MN[m-1]} ${fd(y)}`};
+const ST={plan:'برنامه‌ریزی‌شده',doing:'در حال انجام',done:'انجام شد',cancel:'لغو شد'},SC={plan:'#40bcf4',doing:'#ff8000',done:'#00e054',cancel:'#667788'};
+const MC=[['film','فیلم'],['teaser','تیزر'],['bts','عکس پشت‌صحنه'],['other','سایر']];
+let S={projects:[],cur:null,tab:'info',pv:'day',who:'gen',date:iso(new Date()),sz:'a4',or:'portrait'},armed='',warn='';
+try{S.projects=JSON.parse(localStorage.getItem('fp2')||'[]')}catch(e){}
+function save(){try{localStorage.setItem('fp2',JSON.stringify(S.projects))}catch(e){warn='ذخیره در مرورگر ممکن نشد؛ از خروجی JSON نسخهٔ پشتیبان بگیرید.'}}
+const P=()=>S.projects.find(p=>p.id==S.cur);
+function setP(path,v){const k=path.split('.');let o=P();for(let i=0;i<k.length-1;i++)o=o[k[i]]??(o[k[i]]={});o[k.at(-1)]=v}
+function get(path,mk){const k=path.split('.');let o=P();k.forEach((x,i)=>{o=o[x]??(o[x]=(i==k.length-1&&mk)?mk():{})});return o}
+const rd=(path,d='')=>path.split('.').reduce((o,k)=>o?.[k],P())??d;
+const inp=(p,ex='',c='')=>`<input class="${c}" data-p="${p}" value="${esc(rd(p))}" ${ex}>`;
+const ta=(p,ph='',r=2)=>`<textarea rows=${r} data-p="${p}" placeholder="${ph}">${esc(rd(p))}</textarea>`;
+const sel=(p,o,cur,r)=>`<select ${r?'data-r=1':''} data-p="${p}">${Object.entries(o).map(([k,l])=>`<option value="${k}" ${cur==k?'selected':''}>${l}</option>`).join('')}</select>`;
+const sure=k=>{if(armed==k){armed='';return true}armed=k;render();return false};
+let tt;function note(m,ms=4000){const t=$('#toast');t.textContent=m;t.style.display=m?'block':'none';clearTimeout(tt);if(ms)tt=setTimeout(()=>t.style.display='none',ms)}
+// IndexedDB for media blobs
+const idb=new Promise(r=>{try{const q=indexedDB.open('fpm',1);q.onupgradeneeded=()=>q.result.createObjectStore('b');q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
+const bx=async(m,id,b)=>{const d=await idb;if(!d)return null;return new Promise(r=>{try{const t=d.transaction('b',m=='get'?'readonly':'readwrite'),s=t.objectStore('b'),q=m=='get'?s.get(id):m=='put'?s.put(b,id):s.delete(id);t.oncomplete=()=>r(m=='get'?q.result:1);t.onerror=()=>r(null)}catch(e){r(null)}})};
+async function dlFile(name,data){try{await window.__saveFile(name,data);note('ذخیره شد')}catch(e){note('دانلود انجام نشد')}}
+function render(){$('#app').innerHTML=(warn?`<div class=card>${warn}</div>`:'')+`<div class=nv><svg width="30" height="30" viewBox="0 0 28 28" fill="none" aria-hidden="true"><g stroke="#00e054" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9V5a2 2 0 0 1 2-2h4"/><path d="M19 3h4a2 2 0 0 1 2 2v4"/><path d="M25 19v4a2 2 0 0 1-2 2h-4"/><path d="M9 25H5a2 2 0 0 1-2-2v-4"/></g><path d="M11.5 9.8v8.4l7-4.2z" fill="#ff8000"/></svg><b>قاب</b></div>`+(S.cur?proj():home());hydrate()}
+const U={};async function hydrate(){document.querySelectorAll('[data-m]').forEach(async el=>{const id=el.dataset.m;if(!U[id]){const b=await bx('get',id);if(b)U[id]=URL.createObjectURL(b)}if(U[id])el.src=U[id]})}
+function home(){return `<h1>قاب</h1><p class=m>برنامه‌ریزی، مستندسازی و حساب‌وکتاب فیلم‌سازی، با تقویم شمسی.</p>
+<div class=card><h2>پروژهٔ جدید</h2><div class=row><input id=nn placeholder="نام پروژه"><button class=pri data-a=new>ساخت پروژه</button></div></div>
+<div class=card><h2>بارگذاری پروژهٔ قبلی</h2><p class=m>فایل JSON که قبلاً خروجی گرفته‌اید.</p><input type=file accept=".json,application/json" data-f=imp></div>
+<h2>پروژه‌های شما</h2>${S.projects.length?`<div class=pg>${S.projects.map(p=>`<div><div class=pt data-a=open data-i=${p.id}>${p.info.poster?`<img src="${p.info.poster}">`:''}<span>${esc(p.info.title||p.info.name||'بدون نام')}</span></div><div class=row style="margin-top:6px"><button data-a=expj data-i=${p.id}>JSON</button><button class=x data-a=delp data-i=${p.id}>${armed=='p'+p.id?'مطمئنید؟':'حذف'}</button></div></div>`).join('')}</div>`:'<p class=m>هنوز پروژه‌ای ندارید.</p>'}`}
+const F=[['name','نام پروژه (نام کاری برای صدا زدن)'],['title','تایتل پروژه (عنوان نهایی روی تیتراژ)'],['en','عنوان انگلیسی / بین‌المللی'],['type','نوع اثر','s',['فیلم بلند','فیلم کوتاه','سریال','مستند','تیزر / موزیک‌ویدیو','انیمیشن']],['genre','ژانر'],['dur','مدت (دقیقه)'],['lang','زبان'],['status','وضعیت','s',['ایده','فیلمنامه','پیش‌تولید','تولید','پس‌تولید','اکران']],['dir','کارگردان'],['prod','تهیه‌کننده'],['writer','نویسنده'],['co','شرکت تولید'],['start','تاریخ شروع (مثلاً ۱۴۰۵/۰۸/۲۳)'],['end','تاریخ پایان'],['loc','لوکیشن‌ها'],['fmt','دوربین / فرمت'],['ratio','نسبت تصویر'],['year','سال تولید'],['budget','بودجهٔ برآوردی']];
+function field([k,l,t,o]){const p='info.'+k;return `<div><label>${l}</label>${t=='s'?`<select data-p="${p}"><option value="">—</option>${o.map(x=>`<option ${rd(p)==x?'selected':''}>${x}</option>`).join('')}</select>`:inp(p)}</div>`}
+function node(n){const i=P().crew.indexOf(n),ch=P().crew.filter(c=>c.p==n.id);return `<li><div class=nd>${inp(`crew.${i}.title`,'placeholder="عنوان سمت (مثلاً مدیر فیلمبرداری)"','t')}${ta(`crew.${i}.names`,'نام افراد (هر نام در یک خط)',1)}<div class=bt><button data-a=addc data-i=${n.id}>＋ زیرمجموعه</button><button class=x data-a=delc data-i=${n.id}>${armed=='c'+n.id?'مطمئنید؟':'حذف'}</button></div></div>${ch.length?`<ul>${ch.map(node).join('')}</ul>`:''}</li>`}
+const kids=id=>{let r=[id];P().crew.filter(c=>c.p==id).forEach(c=>r=r.concat(kids(c.id)));return r};
+const cnt=n=>(n.names||'').split('\n').filter(x=>x.trim()).length;
+const heads=()=>P().crew.filter(c=>!c.p).map(c=>[c.title||'—',kids(c.id).reduce((a,id)=>a+cnt(P().crew.find(x=>x.id==id)),0),'#00e054']);
+function chart(items){const mx=Math.max(1,...items.map(i=>Math.abs(i[1])));return `<div class=ch>${items.map(([l,v,c])=>`<div class=cr><span>${esc(l)}</span><div class=cb><i style="width:${Math.round(Math.abs(v)/mx*100)}%;background:${c}"></i></div><b>${nf(v)}</b></div>`).join('')||'<p class=m>داده‌ای برای نمودار نیست.</p>'}</div>`}
+function exp(tab){return `<div class=card><h2>خروجی PDF</h2><div class=row><label>اندازه</label><select data-s=sz>${['a4','a3','a5','letter'].map(x=>`<option value=${x} ${S.sz==x?'selected':''}>${x.toUpperCase()}</option>`).join('')}</select><select data-s=or><option value=portrait ${S.or=='portrait'?'selected':''}>عمودی</option><option value=landscape ${S.or=='landscape'?'selected':''}>افقی</option></select><button class=pri data-a=pdf data-i=${tab}>دانلود PDF این بخش</button>${tab=='fin'?'<button data-a=inv>دانلود صورت‌حساب</button>':''}</div></div>`}
+function info(){const p=P();return `<div class=card><h2>مشخصات پروژه</h2><div class=grid>${F.map(field).join('')}</div><div style="margin-top:10px"><label>لاگ‌لاین</label>${ta('info.logline','داستان در یک یا دو جمله',2)}<label>خلاصهٔ داستان</label>${ta('info.synopsis','',5)}<label>یادداشت‌ها</label>${ta('info.notes','',3)}</div></div>
+<div class=card><h2>پوستر و فیلمنامه</h2><div class=row style="align-items:flex-start;gap:20px"><div>${p.info.poster?`<img class=poster src="${p.info.poster}">`:''}<label>آپلود پوستر</label><input type=file accept="image/*" data-f=poster></div><div style="flex:1"><label>آپلود فیلمنامه (PDF / Word / متن)</label><input type=file data-f=script>${p.info.scriptName?`<p class=m>فایل: ${esc(p.info.scriptName)}${p.info.script?'':' (حجم زیاد؛ فقط نام ذخیره شد)'}</p>`:''}</div></div></div>`+exp('info')}
+function ocNode(n,d){const ch=P().crew.filter(c=>c.p==n.id);return `<li><div class="bx d${Math.min(d,2)}"><b>${esc(n.title||'—')}</b>${(n.names||'').split('\n').filter(x=>x.trim()).map(x=>`<span>${esc(x)}</span>`).join('')}</div>${ch.length?`<ul>${ch.slice().reverse().map(c=>ocNode(c,d+1)).join('')}</ul>`:''}</li>`}
+function ocart(){const p=P(),tops=p.crew.filter(c=>!c.p);if(!tops.length)return '<p class=m>هنوز گروهی نساخته‌اید؛ از بخش «ویرایش عوامل» پایین صفحه شروع کنید.</p>';return `<div class=oc><ul><li><div class="bx d0"><b>${esc(p.info.title||p.info.name||'پروژه')}</b>${p.info.dir?`<span>کارگردان: ${esc(p.info.dir)}</span>`:''}</div><ul>${tops.slice().reverse().map(c=>ocNode(c,1)).join('')}</ul></li></ul></div>`}
+function crew(){const p=P();return `<div class=card><h2>نمودار سازمانی</h2>${ocart()}</div><div class=card><h2>ویرایش عوامل</h2><p class=m>گروه اصلی بسازید و با «زیرمجموعه» سمت‌ها را زیر هم بگذارید.</p><div class=row style="margin-bottom:8px"><button class=pri data-a=addr>＋ گروه جدید</button><button data-a=seed>افزودن گروه‌های پیش‌فرض</button></div><ul class=tree>${p.crew.filter(c=>!c.p).map(node).join('')}</ul></div><div class=card><h2>نمودار تعداد عوامل هر گروه</h2>${chart(heads())}</div>`+exp('crew')}
+// planning
+function whoList(){return [{id:'gen',l:'عمومی (کل پروژه)'},...P().crew.filter(c=>c.title||c.names).map(c=>({id:c.id,l:(c.title||'—')+(c.names?' · '+c.names.split('\n')[0]:'')}))]}
+const wl=w=>(whoList().find(x=>x.id==w)||{}).l||'';
+const tm=s=>{const[h,m]=(s||'0:0').split(':');return +h*60+ +m};
+const weeksOf=(jy,jm)=>{let s=ws(J(jy,jm,1)),e=J(jy,jm,mdays(jy,jm)),r=[];while(s<=e){r.push(s);s=add(s,7)}return r};
+const cntM=(w,jy,jm)=>{let n=0;for(let i=1;i<=mdays(jy,jm);i++)n+=rd(`plan.${w}.d.${iso(J(jy,jm,i))}`,[]).length;return n};
+function cal(jy,jm,w){const f=J(jy,jm,1);let c=WS.map(x=>`<div class=h0>${x}</div>`).join('')+'<div></div>'.repeat(wi(f));for(let i=1;i<=mdays(jy,jm);i++){const k=iso(J(jy,jm,i)),n=rd(`plan.${w}.d.${k}`,[]).length;c+=`<div class="cd ${k==S.date?'on':''}" data-a=goto data-i=${k}>${fd(i)}${n?`<em>${fd(n)}</em>`:''}</div>`}return `<div class=cal>${c}</div>`}
+function stats(w){const c={plan:0,doing:0,done:0,cancel:0};Object.values(rd(`plan.${w}.d`,{})).forEach(L=>L.forEach(t=>c[t.st||'plan']++));return Object.keys(ST).map(k=>[ST[k],c[k],SC[k]])}
+function plan(){const w=S.who,d=pd(S.date),[jy,jm,jd]=jdt(d),base=`plan.${w}.`,pv=S.pv;let lab='',h='';
+if(pv=='day'){lab=dl(S.date);const k=base+'d.'+S.date,L=get(k,()=>[]);L.sort((a,b)=>(a.from||'').localeCompare(b.from||''));
+h=`<div class=tl>${L.filter(t=>t.from&&t.to).map(t=>`<i title="${esc(t.title)}" style="right:${Math.max(0,(tm(t.from)-360)/10.8)}%;width:${Math.max(1,(tm(t.to)-tm(t.from))/10.8)}%;background:${SC[t.st||'plan']}"></i>`).join('')}</div><div class=tk>${[6,9,12,15,18,21,24].map(x=>`<span>${fd(x)}</span>`).join('')}</div>`+
+L.map((t,i)=>`<div class=it style="border-color:${SC[t.st||'plan']}"><div class=tm><input type=time data-r=1 data-p="${k}.${i}.from" value="${t.from||''}"><span>تا</span><input type=time data-r=1 data-p="${k}.${i}.to" value="${t.to||''}">${sel(`${k}.${i}.st`,ST,t.st||'plan',1)}<button class=x data-a=deli data-i="${k}.${i}">✕</button></div>${inp(`${k}.${i}.title`,'placeholder="عنوان کار"')}${inp(`${k}.${i}.loc`,'placeholder="مکان / لوکیشن"')}${ta(`${k}.${i}.desc`,'توضیحات دقیق کار…',3)}${t.st=='done'?ta(`${k}.${i}.res`,'نحوهٔ انجام شدن کار و توضیحات پس از انجام…',3):''}</div>`).join('')+`<button class=pri data-a=addi data-i="${k}">＋ کار جدید</button>`}
+if(pv=='week'){const s=ws(d),k=base+'w.'+iso(s),L=get(k,()=>[]);lab=`هفتهٔ ${dl(iso(s))} تا ${dl(iso(add(s,6)))}`;
+h=`<div class=wg>${WD.map((n,di)=>{const[,m2,d2]=jdt(add(s,di));return `<div class=wc><b>${n} <small>${fd(d2)} ${MN[m2-1]}</small></b>`+L.map((t,i)=>t.day==di?`<div class=wk><button class="star ${t.star?'on':''}" data-a=star data-i="${k}.${i}">★</button><input type=checkbox data-r=1 data-p="${k}.${i}.done" ${t.done?'checked':''}><button class=x data-a=deli data-i="${k}.${i}">✕</button><textarea rows=2 style="${t.done?'text-decoration:line-through;opacity:.6':''}" data-p="${k}.${i}.text">${esc(t.text)}</textarea></div>`:'').join('')+`<button data-a=addw data-i="${k}" data-d=${di}>＋</button></div>`}).join('')}</div>`}
+if(pv=='month'){lab=`${MN[jm-1]} ${fd(jy)}`;const k=base+'m.'+jy+'-'+jm;h=cal(jy,jm,w)+'<h2>عنوان هفته‌ها</h2>'+weeksOf(jy,jm).map(s=>`<div class=wk><span style="min-width:120px">${fd(jdt(s)[2])} ${MN[jdt(s)[1]-1]} ←</span>${inp(k+'.'+iso(s),'placeholder="عنوان هفته"')}</div>`).join('')}
+if(pv=='year'){lab=fd(jy);const k=base+'y.'+jy;h='<div class=grid>'+MN.map((n,i)=>`<div><label>${n} · ${fd(cntM(w,jy,i+1))} کار</label>${inp(k+'.'+i,'placeholder="تایتل ماه"')}</div>`).join('')+'</div>'}
+const pk=pv=='day'?'':'';
+return `<div class=card><div class=chips>${whoList().map(x=>`<button class="${x.id==w?'on':''}" data-a=who data-i=${x.id}>${esc(x.l)}</button>`).join('')}</div><div class=tabs style="margin-top:0">${[['day','روزانه'],['week','هفتگی'],['month','ماهانه'],['year','سالانه']].map(([k,l])=>`<button class="${pv==k?'on':''}" data-a=pv data-i=${k}>${l}</button>`).join('')}</div>
+<div class=nav><button data-a=nav data-i=1>▶</button><b>${lab}</b><button data-a=nav data-i=-1>◀</button><div class=jp><input type=number data-j=y value="${jy}"><select data-j=m>${MN.map((n,i)=>`<option value=${i+1} ${i+1==jm?'selected':''}>${n}</option>`).join('')}</select><input type=number data-j=d min=1 max=31 value="${jd}"></div><button data-a=today>امروز</button></div>${h}</div>
+<div class=card><h2>نمودار وضعیت کارهای «${esc(wl(w))}»</h2>${chart(stats(w))}</div>`+exp('plan')}
+// finance
+const FK=[['exp','هزینه‌ها'],['inc','درآمدها'],['cap','سرمایه‌ها']];
+function finT(){const f=P().fin||{},T={};FK.forEach(([k])=>T[k]=(f[k]||[]).reduce((a,r)=>a+(+r.amt||0),0));T.net=T.inc+T.cap-T.exp;return T}
+function fin(){const f=get('fin'),T=finT(),u=esc(f.unit||'تومان');return `<div class=card><div class=row><label>واحد پول</label><input style="width:120px" data-p="fin.unit" value="${u}"></div></div>`+FK.map(([k,l])=>{const L=get('fin.'+k,()=>[]);return `<div class=card><h2>${l}</h2>${L.map((r,i)=>`<div class=fr>${inp(`fin.${k}.${i}.title`,'placeholder="تایتل"')}${inp(`fin.${k}.${i}.desc`,'placeholder="توضیحات"')}<input type=number data-r=1 data-p="fin.${k}.${i}.amt" value="${r.amt??''}" placeholder="مبلغ"><button class=x data-a=deli data-i="fin.${k}.${i}">✕</button></div>`).join('')}<div class=row><button class=pri data-a=addf data-i=${k}>＋ افزودن</button><b style="margin-inline-start:auto">جمع: ${nf(T[k])} ${u}</b></div></div>`}).join('')+`<div class=sum>مانده نهایی = (درآمد + سرمایه) − هزینه = ${nf(T.net)} ${u}</div><div class=card style="margin-top:14px"><h2>نمودار مالی</h2>${chart([['هزینه‌ها',T.exp,'#ff8000'],['درآمدها',T.inc,'#00e054'],['سرمایه‌ها',T.cap,'#40bcf4'],['مانده',T.net,T.net<0?'#ff8000':'#00e054']])}</div>`+exp('fin')}
+// media
+const fsz=n=>n>1e6?nf(Math.round(n/1e5)/10)+' مگابایت':nf(Math.round(n/1e3))+' کیلوبایت';
+const mcnt=()=>MC.map(([c,l])=>[l,P().media.filter(m=>m.cat==c).length,'#40bcf4']);
+function media(){return MC.map(([c,l])=>{const L=P().media.filter(m=>m.cat==c);return `<div class=card><h2>${l} <small>(${nf(L.length)})</small></h2><input type=file multiple accept="video/*,image/*,audio/*,.pdf" data-f=media data-c=${c}><div class=mg>${L.map(m=>`<div class=mi>${m.type.startsWith('video')?`<video controls preload=metadata data-m=${m.id}></video>`:m.type.startsWith('image')?`<img data-m=${m.id}>`:`<div class=ic>${esc(m.name.split('.').pop())}</div>`}<p title="${esc(m.name)}">${esc(m.name)}</p><span>${fsz(m.size)}</span> <button class=x data-a=delm data-i=${m.id}>حذف</button></div>`).join('')}</div></div>`}).join('')+`<div class=card><h2>نمودار تعداد فایل‌ها</h2>${chart(mcnt())}<p class=m>فایل‌ها فقط در مرورگر همین دستگاه ذخیره می‌شوند؛ برای نسخهٔ پشتیبان «دانلود کل پروژه» را بزنید.</p></div>`+exp('media')}
+function proj(){const p=P();return `<div class=row><button data-a=home>→ پروژه‌ها</button><h1 style="flex:1">${esc(p.info.title||p.info.name||'پروژهٔ بدون نام')}</h1><button data-a=expj data-i=${p.id}>JSON</button><button class=pri data-a=zip>دانلود کل پروژه (ZIP)</button></div>
+<div class=tabs>${[['info','مشخصات'],['crew','چارت عوامل'],['plan','برنامه‌ریزی'],['fin','خرج و مخارج'],['media','رسانه']].map(([k,l])=>`<button class="${S.tab==k?'on':''}" data-a=tab data-i=${k}>${l}</button>`).join('')}</div>${({info,crew,plan,fin,media})[S.tab]()}`}
+// reports
+const T=(h,rows)=>`<table class=rt><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(x=>`<td>${esc(x).replace(/\n/g,'<br>')}</td>`).join('')}</tr>`).join('')}</table>`;
+const RH=t=>`<div class=rb><i></i><i></i><i></i><i></i></div><h1>${esc(P().info.title||P().info.name||'')}</h1><p>${esc(t)} · ${dl(iso(new Date()))}</p>`;
+const flat=(id='',dp=0)=>P().crew.filter(c=>(c.p||'')==id).flatMap(c=>[['— '.repeat(dp)+c.title,(c.names||'').replace(/\n/g,'، ')],...flat(c.id,dp+1)]);
+const repInfo=()=>RH('شناسنامهٔ پروژه')+T(['مورد','مقدار'],F.map(f=>[f[1],P().info[f[0]]||'—']))+`<h2>لاگ‌لاین</h2><p>${esc(P().info.logline||'—')}</p><h2>خلاصه</h2><p>${esc(P().info.synopsis||'—')}</p>`;
+const repCrew=()=>RH('چارت عوامل')+ocart()+T(['سمت','نام‌ها'],flat())+chart(heads());
+const dayRows=L=>L.map(t=>[`${t.from||''} تا ${t.to||''}`,t.title,t.loc,ST[t.st||'plan'],t.desc,t.res]);
+const DH=['ساعت','کار','مکان','وضعیت','توضیحات','نحوهٔ انجام'];
+function repPlan(){const w=S.who,d=pd(S.date),[jy,jm]=jdt(d);let b='';
+if(S.pv=='day')b=`<h2>${dl(S.date)}</h2>`+T(DH,dayRows(rd(`plan.${w}.d.${S.date}`,[])));
+if(S.pv=='week'){const s=ws(d);b=`<h2>هفتهٔ ${dl(iso(s))}</h2>`+T(['روز','کار','مهم','انجام'],rd(`plan.${w}.w.${iso(s)}`,[]).slice().sort((a,c)=>a.day-c.day).map(t=>[WD[t.day],t.text,t.star?'★':'',t.done?'✓':'']))}
+if(S.pv=='month')b=`<h2>${MN[jm-1]} ${fd(jy)}</h2>`+cal(jy,jm,w)+T(['هفته','عنوان'],weeksOf(jy,jm).map(s=>[dl(iso(s)),rd(`plan.${w}.m.${jy}-${jm}.${iso(s)}`)]));
+if(S.pv=='year')b=`<h2>سال ${fd(jy)}</h2>`+T(['ماه','تایتل','تعداد کار'],MN.map((n,i)=>[n,rd(`plan.${w}.y.${jy}.${i}`),fd(cntM(w,jy,i+1))]));
+return RH('برنامهٔ '+wl(w))+b+'<h2>وضعیت کارها</h2>'+chart(stats(w))}
+function repPlanAll(w){const pl=rd('plan.'+w,{});let b='';Object.keys(pl.y||{}).sort().forEach(y=>b+=`<h2>سال ${fd(y)}</h2>`+T(['ماه','تایتل'],MN.map((n,i)=>[n,pl.y[y][i]])));
+Object.keys(pl.m||{}).sort().forEach(k=>{const[y,m]=k.split('-');b+=`<h2>${MN[m-1]} ${fd(y)}</h2>`+T(['هفته','عنوان'],Object.entries(pl.m[k]).map(([s,t])=>[dl(s),t]))});
+Object.keys(pl.w||{}).sort().forEach(k=>{if(pl.w[k].length)b+=`<h2>هفتهٔ ${dl(k)}</h2>`+T(['روز','کار','مهم','انجام'],pl.w[k].slice().sort((a,c)=>a.day-c.day).map(t=>[WD[t.day],t.text,t.star?'★':'',t.done?'✓':'']))});
+Object.keys(pl.d||{}).sort().forEach(k=>{if(pl.d[k].length)b+=`<h2>${dl(k)}</h2>`+T(DH,dayRows(pl.d[k]))});return b?RH('برنامهٔ کامل — '+wl(w))+b+'<h2>وضعیت کارها</h2>'+chart(stats(w)):''}
+const finTables=()=>{const f=P().fin||{},u=f.unit||'تومان';return FK.map(([k,l])=>`<h2>${l}</h2>`+T(['تایتل','توضیحات','مبلغ ('+u+')'],(f[k]||[]).map(r=>[r.title,r.desc,nf(r.amt)]).concat([['جمع','',nf(finT()[k])]]))).join('')};
+const repFin=()=>{const T0=finT();return RH('گزارش مالی')+finTables()+`<h2>مانده نهایی</h2><p><b>${nf(T0.net)} ${esc(P().fin?.unit||'تومان')}</b></p>`+chart([['هزینه‌ها',T0.exp,'#ff8000'],['درآمدها',T0.inc,'#00b844'],['سرمایه‌ها',T0.cap,'#40bcf4'],['مانده',T0.net,'#556677']])};
+const repInv=()=>{const T0=finT(),u=P().fin?.unit||'تومان';return RH('صورت‌حساب مالی')+finTables()+`<h2>خلاصه</h2>`+T(['شرح','مبلغ ('+u+')'],[['جمع درآمدها',nf(T0.inc)],['جمع سرمایه‌ها',nf(T0.cap)],['جمع هزینه‌ها',nf(T0.exp)],['مانده نهایی (درآمد + سرمایه − هزینه)',nf(T0.net)]])};
+const repMedia=()=>RH('فهرست رسانه')+T(['دسته','نام فایل','حجم'],MC.flatMap(([c,l])=>P().media.filter(m=>m.cat==c).map(m=>[l,m.name,fsz(m.size)])))+chart(mcnt());
+const REP={info:repInfo,crew:repCrew,plan:repPlan,fin:repFin,media:repMedia};
+async function toPdf(secs,size,or){await (document.fonts?.ready);const pdf=new jspdf.jsPDF({orientation:or,unit:'mm',format:size});const W=pdf.internal.pageSize.getWidth(),H=pdf.internal.pageSize.getHeight(),m=8,w=W-2*m;let first=true;
+for(const h of secs){if(!h)continue;const el=document.createElement('div');el.className='rp';el.style.width=Math.round(w*3.78)+'px';el.innerHTML=h;document.body.appendChild(el);let c;try{c=await html2canvas(el,{scale:1.6,backgroundColor:'#fff'})}finally{el.remove()}
+const sh=(H-2*m)*c.width/w;for(let y=0;y<c.height-1;y+=sh){const s=document.createElement('canvas');s.width=c.width;s.height=Math.min(sh,c.height-y);s.getContext('2d').drawImage(c,0,y,c.width,s.height,0,0,c.width,s.height);if(!first)pdf.addPage();first=false;pdf.addImage(s.toDataURL('image/jpeg',.9),'JPEG',m,m,w,s.height*w/c.width)}}return pdf}
+async function makePdf(secs,name){if(!window.jspdf||!window.html2canvas)return note('کتابخانهٔ PDF بارگذاری نشد؛ برنامه را دوباره باز کن.');note('در حال ساخت PDF…',0);try{const pdf=await toPdf(secs,S.sz,S.or);await dlFile(name+'.pdf',pdf.output('blob'))}catch(e){note('ساخت PDF ناموفق بود')}}
+async function zipAll(){if(!window.JSZip)return note('کتابخانهٔ ZIP بارگذاری نشد.');const p=P();if(!p)return note('اول یک پروژه باز کن');const nm=(p.info.title||p.info.name||'project').replace(/[\\/:*?"<>|]/g,'')||'project';note('در حال ساخت فایل ZIP…',0);
+try{const z=new JSZip(),r=z.folder(nm),pdf=await toPdf([repInfo(),repCrew(),...whoList().map(x=>repPlanAll(x.id)),repFin(),repInv(),repMedia()],S.sz,S.or);r.file('پروژه-کامل.pdf',pdf.output('blob'));
+const b64=s=>s.split(',')[1];if(p.info.poster)r.folder('۱-مشخصات و پوستر').file('پوستر.jpg',b64(p.info.poster),{base64:true});if(p.info.script)r.folder('۲-فیلمنامه').file(p.info.scriptName,b64(p.info.script),{base64:true});
+const used={};for(const m of p.media){const b=await bx('get',m.id);if(!b)continue;const cn=MC.find(c=>c[0]==m.cat)[1],k=cn+m.name;used[k]=(used[k]||0)+1;r.folder('۳-رسانه/'+cn).file((used[k]>1?used[k]+'-':'')+m.name,b)}
+r.folder('۴-داده').file('project.json',JSON.stringify(p,null,1));await dlFile(nm+'.zip',await z.generateAsync({type:'blob'}))}catch(e){note('ساخت ZIP ناموفق بود')}}
+function imp(o){(Array.isArray(o)?o:[o]).forEach(p=>{if(!p||!p.info)return;p.crew=p.crew||[];p.plan=p.plan||{};p.fin=p.fin||{};p.media=p.media||[];const i=S.projects.findIndex(x=>x.id==p.id);i<0?S.projects.push(p):S.projects[i]=p});save()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,i=b.dataset.i;
+if(a=='pdf')return makePdf([REP[i]()],(P().info.name||'project')+'-'+i);if(a=='inv')return makePdf([repInv()],'invoice');if(a=='zip')return zipAll();
+if(a=='expj')return dlFile((S.projects.find(p=>p.id==i).info.name||'project')+'.json',JSON.stringify(S.projects.find(p=>p.id==i),null,1));
+if(a=='new'){const p={id:uid(),info:{name:$('#nn').value.trim(),status:'ایده'},crew:[],plan:{},fin:{exp:[],inc:[],cap:[]},media:[]};S.projects.push(p);S.cur=p.id;S.tab='info';S.who='gen'}
+else if(a=='open'){S.cur=i;S.tab='info';S.who='gen'}else if(a=='home')S.cur=null;
+else if(a=='delp'){if(!sure('p'+i))return;S.projects=S.projects.filter(p=>p.id!=i)}
+else if(a=='tab')S.tab=i;else if(a=='pv')S.pv=i;else if(a=='who')S.who=i;else if(a=='today')S.date=iso(new Date());else if(a=='goto'){S.date=i;S.pv='day'}
+else if(a=='nav'){const n=+i,d=pd(S.date),[y,m]=jdt(d);if(S.pv=='day')S.date=iso(add(d,n));if(S.pv=='week')S.date=iso(add(d,7*n));if(S.pv=='month'){let mm=m+n,yy=y;if(mm>12){mm=1;yy++}if(mm<1){mm=12;yy--}S.date=iso(J(yy,mm,1))}if(S.pv=='year')S.date=iso(J(y+n,1,1))}
+else if(a=='addr'||a=='addc')P().crew.push({id:uid(),title:'',names:'',p:a=='addc'?i:''});
+else if(a=='delc'){if(!sure('c'+i))return;const ids=kids(i);P().crew=P().crew.filter(c=>!ids.includes(c.id))}
+else if(a=='seed'){[['کارگردانی',['دستیار اول کارگردان','منشی صحنه','برنامه‌ریز']],['تهیه و تولید',['مدیر تولید','دستیار تولید']],['تصویربرداری',['مدیر فیلمبرداری','دستیار اول دوربین','گریپ و برق']],['صدا',['صدابردار','دستیار صدا','صداگذار']],['طراحی صحنه و لباس',['طراح صحنه','طراح لباس']],['گریم',[]],['تدوین و پس‌تولید',['تدوینگر','رنگ‌بند']],['بازیگران',[]]].forEach(([t,c])=>{const id=uid();P().crew.push({id,title:t,names:'',p:''});c.forEach(x=>P().crew.push({id:uid(),title:x,names:'',p:id}))})}
+else if(a=='addi')get(i,()=>[]).push({from:'',to:'',title:'',loc:'',desc:'',st:'plan',res:''});
+else if(a=='addw')get(i,()=>[]).push({day:+b.dataset.d,text:'',star:false,done:false});
+else if(a=='addf')get('fin.'+i,()=>[]).push({title:'',desc:'',amt:''});
+else if(a=='deli'){const k=i.split('.'),n=k.pop();get(k.join('.')).splice(n,1)}
+else if(a=='star'){const k=i.split('.'),n=k.pop(),t=get(k.join('.'))[n];t.star=!t.star}
+else if(a=='delm'){bx('del',i);P().media=P().media.filter(m=>m.id!=i)}
+else return;save();render()});
+document.addEventListener('change',async e=>{const t=e.target;
+if(t.dataset.s){S[t.dataset.s]=t.value;return}
+if(t.dataset.j){const q=k=>+document.querySelector(`[data-j=${k}]`).value;const y=q('y'),m=q('m'),dd=Math.min(Math.max(1,q('d')),mdays(y,m));S.date=iso(J(y,m,dd));return render()}
+if(t.dataset.f){const fs=[...t.files];if(!fs.length)return;const k=t.dataset.f;
+if(k=='media'){note('در حال ذخیره…',0);for(const f of fs){const id=uid();if(await bx('put',id,f)===null){note('ذخیره‌سازی فایل در این مرورگر ممکن نیست');return}P().media.push({id,cat:t.dataset.c,name:f.name,type:f.type||'',size:f.size})}save();note('ذخیره شد');return render()}
+const f=fs[0],rdr=new FileReader();
+if(k=='imp'){rdr.onload=()=>{try{imp(JSON.parse(rdr.result));render()}catch(x){note('فایل معتبر نیست')}};rdr.readAsText(f)}
+else if(k=='poster'){rdr.onload=()=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas'),s=Math.min(1,600/im.width);c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);P().info.poster=c.toDataURL('image/jpeg',.8);save();render()};im.src=rdr.result};rdr.readAsDataURL(f)}
+else{rdr.onload=()=>{P().info.scriptName=f.name;P().info.script=f.size<1500000?rdr.result:'';save();render()};rdr.readAsDataURL(f)}return}
+const p=t.dataset.p;if(!p)return;setP(p,t.type=='checkbox'?t.checked:t.type=='number'?(t.value===''?'':+t.value):t.value);save();if(t.dataset.r)render()});
+(function(){const sp=$('#sp');if(!sp)return;const done=()=>{sp.classList.add('out');setTimeout(()=>sp.remove(),600)};if(matchMedia('(prefers-reduced-motion:reduce)').matches)return sp.remove();
+const T=(ms,f)=>setTimeout(f,ms);['i1','i2','i3','i4'].forEach((id,k)=>T(350+k*550,()=>$('#'+id)?.classList.add('in')));T(2800,()=>sp.classList.add('merge'));T(3450,()=>sp.classList.add('logo'));T(4100,()=>sp.classList.add('name'));T(5200,done);sp.onclick=done})();
+render();
+</script></body></html>

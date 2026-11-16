@@ -1,0 +1,1004 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>آنالوگ رکوردز</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;800;900&display=swap">
+<style>
+/* Layout: three full-screen views (home logo → notebook → galaxy of yellow note squares), plus a gramophone
+   and a tray of customisable discs that live above all views.
+   Look: cream / brick red / ink / blue, hard offset shadows; the galaxy is pure black. Single deliberate look. */
+:root{
+  --cream:#eae8c9;
+  --red:#c62a00;
+  --ink:#0d0d06;
+  --blue:#4352c4;
+  --yellow:#ffd60a;
+  --paper:#f3f0d8;
+  --font-ui:"Vazirmatn","Vazir","Tahoma","DejaVu Sans",sans-serif;
+  color-scheme:dark;
+}
+html,body{height:100%}
+body{background:var(--cream);color:var(--ink);font-family:var(--font-ui);overflow:hidden;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box}
+#app{position:fixed;inset:0}
+.view{position:absolute;inset:0;display:none;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.view.active{display:block}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+
+/* ---------- home ---------- */
+#home{background:var(--cream)}
+#home.active{display:flex;align-items:center;justify-content:center}
+.logo-btn{background:none;border:0;padding:0;cursor:pointer;display:block;max-width:100%;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.logo-btn img{display:block;width:min(88vw,860px);max-height:84vh;object-fit:contain;height:auto}
+.logo-btn:hover{transform:scale(1.025)}
+.logo-btn:active{transform:scale(.97)}
+#home.active .logo-btn{animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px) scale(.98);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+
+.back{position:fixed;top:max(14px,env(safe-area-inset-top,0px));right:max(14px,env(safe-area-inset-right,0px));z-index:20;background:var(--ink);color:var(--cream);border:0;padding:10px 16px;font-weight:800;font-size:14px;cursor:pointer}
+.back:hover{background:var(--red)}
+
+/* ---------- notebook ---------- */
+#win{background:var(--cream)}
+#win.active{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px}
+.nb{position:relative;width:min(74vw,330px);aspect-ratio:3/4.1;background:none;border:0;padding:0;cursor:pointer;perspective:1700px;transition:transform .9s cubic-bezier(.5,.1,.2,1);display:block}
+.nb:hover:not(.open){transform:translateY(-6px) rotate(-.8deg)}
+.nb.open{transform:translateX(-46%)}
+.nb-shadow{position:absolute;left:4%;right:-6%;bottom:-18px;height:26px;background:radial-gradient(ellipse at center,rgba(13,13,6,.35),transparent 70%);filter:blur(3px)}
+.nb-pages{position:absolute;inset:0;background:var(--paper);border:3px solid var(--ink);box-shadow:-4px 3px 0 -1px var(--paper),-4px 3px 0 0 var(--ink),-8px 6px 0 -1px var(--paper),-8px 6px 0 0 var(--ink),-12px 9px 0 -1px var(--paper),-12px 9px 0 0 var(--ink);display:block}
+.lines{position:absolute;inset:0;display:block;background:repeating-linear-gradient(transparent 0 27px,rgba(67,82,196,.38) 27px 28px) 0 54px/100% 100% no-repeat,linear-gradient(90deg,transparent calc(100% - 15%),rgba(198,42,0,.55) calc(100% - 15%) calc(100% - 15% + 2px),transparent 0)}
+.nb-cover{position:absolute;inset:0;transform-origin:right center;transform-style:preserve-3d;transition:transform 1s cubic-bezier(.5,.1,.2,1);display:block}
+.nb:hover:not(.open) .nb-cover{transform:rotateY(9deg)}
+.nb.open .nb-cover{transform:rotateY(168deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:3px solid var(--ink);display:block}
+.face.front{background:radial-gradient(rgba(0,0,0,.14) 1px,transparent 1.5px) 0 0/5px 5px,var(--red)}
+.face.back{transform:rotateY(180deg);background:var(--paper)}
+.stitch{position:absolute;inset:7px 14% 7px 7px;border:2px dashed rgba(234,232,201,.65);display:block}
+.patch{position:absolute;left:12%;right:15%;top:12%;aspect-ratio:1;background:#000;border:3px solid var(--cream);box-shadow:5px 5px 0 var(--ink);display:block;padding:4%}
+.patch img{width:100%;height:100%;object-fit:contain;display:block}
+.cap{position:absolute;left:12%;right:15%;bottom:9%;text-align:center;color:var(--cream);font-weight:900;font-size:clamp(13px,4.6vw,19px);display:block}
+.band{position:absolute;left:6%;width:15px;top:-5px;bottom:-5px;background:var(--ink);display:block}
+.band b{position:absolute;left:-4px;right:-4px;top:46%;height:30px;background:var(--cream);border:3px solid var(--ink);display:block}
+.spine{position:absolute;right:0;top:0;bottom:0;width:11%;background:var(--ink);display:flex;flex-direction:column;justify-content:space-around;align-items:center;padding:12% 0}
+.spine i{display:block;width:3px;height:14%;background:var(--cream);opacity:.75}
+.nb-hint{margin:0;font-weight:800;font-size:15px;color:var(--ink)}
+
+/* ---------- galaxy ---------- */
+#stars{position:fixed;inset:0;width:100%;height:100%;display:none;z-index:0;background:#000}
+#stars.on{display:block}
+#galaxy{background:transparent;overflow-y:auto;overflow-x:hidden;z-index:1}
+#galaxy.active{display:block;animation:crt .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes crt{0%{clip-path:inset(49.5% 0 49.5% 0);filter:brightness(4)}55%{clip-path:inset(0 0 0 0);filter:brightness(2)}100%{clip-path:inset(0 0 0 0);filter:none}}
+#field{position:relative;width:100%}
+#logoBlock{position:absolute;z-index:2;pointer-events:none}
+#logoBlock img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;animation:levit 6.5s ease-in-out infinite;filter:drop-shadow(0 18px 24px rgba(255,255,255,.05))}
+#logoBlock .gnd{position:absolute;left:18%;right:18%;bottom:-3%;height:7%;background:radial-gradient(ellipse at center,rgba(255,255,255,.18),transparent 70%);animation:gnd 6.5s ease-in-out infinite}
+@keyframes levit{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-13px) rotate(-1.1deg)}}
+@keyframes gnd{0%,100%{transform:scaleX(1);opacity:.9}50%{transform:scaleX(.82);opacity:.45}}
+
+.note{position:absolute;display:flex;align-items:center;justify-content:center;background:rgba(6,6,2,.78);border:1px solid rgba(255,255,255,.16);overflow:hidden;animation:spawn .55s steps(1) both;z-index:1;transition:left .35s cubic-bezier(.2,.8,.2,1),top .35s cubic-bezier(.2,.8,.2,1)}
+.note::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);pointer-events:none}
+.note.out{animation:despawn .6s steps(1) both}
+@keyframes spawn{0%{opacity:0}10%{opacity:1;transform:translateX(-6px) scaleY(.2)}20%{opacity:.2;transform:none}32%{opacity:1;transform:translateX(5px)}44%{opacity:.35}56%,100%{opacity:1;transform:none}}
+@keyframes despawn{0%{opacity:1}20%{opacity:.2;transform:translateX(5px)}40%{opacity:.9}60%{opacity:.1}100%{opacity:0}}
+.txt{position:relative;width:100%;padding:0 9%;text-align:center;direction:rtl;font-family:var(--font-ui);font-weight:800;line-height:1.55;color:var(--yellow);text-shadow:0 0 6px rgba(255,214,10,.85),0 0 20px rgba(255,190,0,.5);-webkit-mask-image:var(--grain);mask-image:var(--grain);-webkit-mask-size:160px 160px;mask-size:160px 160px}
+.txt .w{opacity:0;transition:opacity .08s}
+.txt .w.on{opacity:1}
+.note.glitch .txt{animation:gl .3s steps(2) 1}
+@keyframes gl{0%{transform:translateX(0);text-shadow:-3px 0 #ff2d55,3px 0 #19ffa0,0 0 14px rgba(255,214,10,.9)}25%{transform:translateX(5px) skewX(-6deg)}50%{transform:translateX(-4px)}75%{transform:translateX(3px) skewX(4deg)}100%{transform:none}}
+.streak{position:absolute;height:2px;pointer-events:none;opacity:.9;animation:str .3s steps(3) both}
+@keyframes str{from{transform:translateX(-14px);opacity:1}to{transform:translateX(18px);opacity:0}}
+.note .ctl{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;padding:3px;opacity:0;transition:opacity .15s;z-index:3;direction:ltr}
+.note:hover .ctl,.note.sel .ctl,.note:focus-within .ctl{opacity:1}
+.ctl button{background:rgba(0,0,0,.75);border:1px solid rgba(255,214,10,.5);color:var(--yellow);width:26px;height:26px;font-size:14px;line-height:1;cursor:pointer;padding:0}
+.ctl .hd{cursor:grab;touch-action:none}
+.ctl .rm:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.ctl button:hover{border-color:var(--yellow)}
+.note.drag{transition:none;z-index:30;box-shadow:0 0 30px rgba(255,214,10,.4);border-color:var(--yellow);cursor:grabbing}
+.note textarea.edit{position:absolute;inset:32px 6px 6px;background:transparent;border:0;outline:0;resize:none;color:var(--yellow);font:inherit;font-weight:800;font-size:15px;line-height:1.5;text-align:center;direction:rtl;text-shadow:0 0 6px rgba(255,214,10,.7)}
+.empty{position:fixed;left:50%;bottom:calc(max(14px,env(safe-area-inset-bottom,0px)) + 62px);transform:translateX(-50%);width:min(92vw,520px);z-index:20;text-align:center;color:var(--yellow);font-weight:500;font-size:13px;text-shadow:0 0 10px rgba(255,214,10,.7);direction:rtl}
+.compose{position:fixed;bottom:max(14px,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(92vw,520px);z-index:20;display:flex;background:rgba(0,0,0,.85);border:1px solid var(--yellow);direction:rtl}
+.compose input{flex:1;min-width:0;background:transparent;border:0;color:var(--yellow);font:inherit;font-weight:500;padding:11px 14px;outline:0;font-size:14px}
+.compose input::placeholder{color:rgba(255,214,10,.5)}
+.compose button{border:0;background:var(--yellow);color:#000;font-weight:900;padding:0 18px;cursor:pointer;font-size:14px}
+.compose:focus-within{box-shadow:0 0 18px rgba(255,214,10,.35)}
+
+/* ---------- discs (shared look) ---------- */
+.disc{--vinyl:#14110a;--rim:#c62a00;--label:#eae8c9;--lci:#0d0d06;--gw:3px;position:relative;width:100%;aspect-ratio:1;container-type:inline-size;display:block}
+.dv{position:absolute;inset:0;border-radius:50%;display:block;background:repeating-radial-gradient(circle,var(--vinyl) 0 var(--gw),color-mix(in srgb,var(--vinyl) 80%,#fff) var(--gw) calc(var(--gw)*2));box-shadow:inset 0 0 0 3.4cqw var(--rim),inset 0 0 0 4.4cqw rgba(0,0,0,.45),0 2px 0 rgba(0,0,0,.35)}
+.dv::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 20deg,transparent 0 6%,rgba(255,255,255,.17) 11%,transparent 20%,transparent 52%,rgba(255,255,255,.12) 60%,transparent 70%)}
+.lab{position:absolute;left:50%;top:50%;width:34%;height:34%;transform:translate(-50%,-50%);border-radius:50%;background:var(--label) center/cover;color:var(--lci);display:flex;align-items:center;justify-content:center;text-align:center;z-index:1;box-shadow:0 0 0 1.2cqw rgba(0,0,0,.25);overflow:hidden}
+.lab b{font-size:3.6cqw;font-weight:900;line-height:1.2;padding:0 14%;display:block;max-height:72%;overflow:hidden;direction:rtl}
+.lab::after{content:"";position:absolute;left:50%;top:50%;width:7%;height:7%;transform:translate(-50%,-50%);background:#000;border-radius:50%;box-shadow:0 0 0 .6cqw rgba(255,255,255,.35)}
+.sleeve{--cv:#c62a00;--ci:#eae8c9;position:relative;width:100%;aspect-ratio:1;container-type:inline-size;background:var(--cv) center/cover;border:3px solid var(--ink);display:block;overflow:hidden}
+.sleeve::before{content:"";position:absolute;inset:0;display:block}
+.sleeve[data-p=dots]::before{background:radial-gradient(circle,color-mix(in srgb,var(--ci) 45%,transparent) 32%,transparent 34%) 0 0/11% 11%;-webkit-mask-image:linear-gradient(135deg,#000,transparent 75%);mask-image:linear-gradient(135deg,#000,transparent 75%)}
+.sleeve[data-p=stripes]::before{background:repeating-linear-gradient(45deg,color-mix(in srgb,var(--ci) 28%,transparent) 0 6%,transparent 6% 14%)}
+.sleeve[data-p=checks]::before{background:conic-gradient(color-mix(in srgb,var(--ci) 26%,transparent) 25%,transparent 0 50%,color-mix(in srgb,var(--ci) 26%,transparent) 0 75%,transparent 0) 0 0/20% 20%}
+.sname{position:absolute;right:7%;left:7%;bottom:6%;color:var(--ci);font-weight:900;font-size:11cqw;line-height:1.25;direction:rtl;text-align:right;text-shadow:0 1px 0 rgba(0,0,0,.25);display:block;overflow:hidden;max-height:40%}
+.sleeve[data-img="1"] .sname{background:rgba(0,0,0,.5);padding:2% 4%;right:0;left:0;bottom:0}
+
+/* ---------- gramophone ---------- */
+#gramo{position:fixed;left:max(10px,env(safe-area-inset-left,0px));bottom:max(8px,env(safe-area-inset-bottom,0px));width:300px;height:300px;z-index:40;pointer-events:none;transform:scale(.85);transform-origin:left bottom;transition:bottom .3s}
+#gramo>*{pointer-events:auto}
+.g-horn{position:absolute;left:0;top:0;width:300px;height:190px;pointer-events:none!important;overflow:visible}
+.g-box{position:absolute;left:26px;top:152px;width:228px;height:100px;background:var(--red);border:3px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
+#gramo[data-v=galaxy] .g-box{box-shadow:6px 6px 0 rgba(255,255,255,.28)}
+.g-plate{position:absolute;left:19px;top:42px;width:262px;height:262px;pointer-events:none!important}
+.g-slab{position:absolute;left:19px;top:42px;width:262px;height:262px;transform:scaleY(.47);border-radius:50%;background:var(--ink);border:5px solid var(--cream);box-shadow:0 0 0 3px var(--ink);pointer-events:none!important;z-index:0}
+.g-tilt{position:absolute;left:31px;top:54px;width:238px;height:238px;transform:scaleY(.47);border-radius:50%;z-index:2}
+.g-tilt .disc{position:absolute;inset:0}
+.g-tilt .disc .dv{animation:spin 1.9s linear infinite;animation-play-state:paused}
+#gramo.playing .g-tilt .dv{animation-play-state:running}
+.g-tilt .ph{position:absolute;inset:6%;border-radius:50%;border:3px dashed rgba(234,232,201,.28)}
+#gramo.has .g-tilt .ph{display:none}
+.g-tilt.over{filter:drop-shadow(0 0 14px var(--yellow))}
+@keyframes spin{to{transform:rotate(360deg)}}
+.g-arm{position:absolute;left:0;top:0;width:300px;height:230px;pointer-events:none!important;z-index:3;overflow:visible}
+.g-arm .arm{transform-origin:244px 132px;transform:rotate(32deg);transition:transform .9s cubic-bezier(.5,.1,.2,1)}
+#gramo.playing .g-arm .arm{transform:rotate(calc(-2deg + var(--armp,0)*-9deg))}
+#gramo.has:not(.playing) .g-arm .arm{transform:rotate(14deg)}
+.g-btns{position:absolute;left:36px;top:198px;width:208px;display:flex;gap:6px;z-index:4}
+.g-btns button{flex:1;height:32px;background:var(--cream);color:var(--ink);border:3px solid var(--ink);font-weight:800;font-size:11px;cursor:pointer;padding:0;line-height:1}
+.g-btns button:hover{background:var(--yellow)}
+.g-btns button[aria-pressed=true]{background:var(--ink);color:var(--cream)}
+.g-stat{position:absolute;left:26px;top:262px;width:228px;height:26px;background:var(--ink);color:var(--yellow);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;direction:rtl;border:2px solid var(--cream)}
+
+/* tray */
+#tray{position:fixed;left:max(10px,env(safe-area-inset-left,0px));bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 272px);width:min(94vw,640px);z-index:41;background:var(--cream);border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);padding:12px 14px 14px;direction:rtl;display:none}
+#tray.open{display:block;animation:pop .35s cubic-bezier(.2,.9,.25,1.2) both}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+.t-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;color:var(--ink)}
+.t-head h2{margin:0;font-size:15px;font-weight:900}
+.t-head small{font-weight:500;opacity:.7;font-size:11px}
+.t-row{display:flex;gap:14px;overflow-x:auto;padding:14px 4px 6px;touch-action:pan-x}
+.ti{flex:0 0 108px;cursor:pointer;position:relative;user-select:none;-webkit-user-select:none;text-align:center;outline-offset:4px}
+.ti-stack{position:relative;width:108px;height:122px}
+.ti-disc{position:absolute;left:8px;top:0;width:92px;transition:transform .25s}
+.ti:hover .ti-disc{transform:translateY(-12px)}
+.ti .sleeve{position:absolute;left:0;bottom:0;width:108px;box-shadow:4px 4px 0 var(--ink)}
+.ti.away .ti-disc{visibility:hidden}
+.ti.away .sleeve::after{content:"روی گرامافون";position:absolute;inset:0;background:rgba(13,13,6,.72);color:var(--yellow);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center}
+.ti-name{margin-top:8px;font-size:12px;font-weight:800;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ti.add .ti-stack{display:flex;align-items:flex-end}
+.ti.add .plus{width:108px;height:108px;border:3px dashed var(--ink);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:900;color:var(--ink);transition:background .2s}
+.ti.add:hover .plus{background:var(--yellow)}
+.t-empty{padding:18px 6px;font-size:13px;color:var(--ink)}
+.fly{position:fixed;z-index:90;pointer-events:none;transform-origin:center}
+.ghost{position:fixed;z-index:90;pointer-events:none;width:110px;opacity:.95;filter:drop-shadow(0 8px 10px rgba(0,0,0,.4))}
+
+/* context menu */
+#ctx{position:fixed;z-index:95;min-width:150px;background:var(--ink);border:2px solid var(--cream);box-shadow:5px 5px 0 var(--red);display:none;direction:rtl}
+#ctx.open{display:block}
+#ctx button{display:block;width:100%;text-align:right;background:none;border:0;color:var(--cream);font-weight:800;font-size:14px;padding:10px 14px;cursor:pointer}
+#ctx button:hover,#ctx button:focus-visible{background:var(--red)}
+
+/* disc editor */
+#modal{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:14px;direction:rtl}
+#modal.open{display:flex}
+.ed{width:min(96vw,760px);max-height:94vh;overflow:auto;background:var(--cream);color:var(--ink);border:3px solid var(--ink);box-shadow:10px 10px 0 var(--red);padding:18px;display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:20px}
+.ed h2{margin:0 0 4px;font-size:18px;font-weight:900;grid-column:1/-1}
+.ed-prev{display:flex;flex-direction:column;gap:14px;align-items:center}
+.ed-prev .sleeve{width:170px;box-shadow:5px 5px 0 var(--ink)}
+.ed-prev .disc{width:170px}
+.ed-form{display:grid;gap:12px;min-width:0}
+.ed label{display:grid;gap:5px;font-size:12px;font-weight:800}
+.ed input[type=text],.ed select{width:100%;background:#fff8;border:2px solid var(--ink);padding:8px 10px;font:inherit;font-weight:500;font-size:14px;color:var(--ink);min-width:0}
+.ed input[type=file]{font-size:12px;max-width:100%}
+.cgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cgrid label{font-size:11px}
+.ed input[type=color]{width:100%;height:34px;border:2px solid var(--ink);padding:0;background:none;cursor:pointer}
+.presets{display:flex;gap:8px;flex-wrap:wrap}
+.presets button{width:34px;height:34px;border:2px solid var(--ink);cursor:pointer;padding:0;border-radius:50%}
+.chk{display:flex!important;align-items:center;gap:8px}
+.ed-act{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-start;align-items:center;flex-wrap:wrap}
+.ed-act button{border:3px solid var(--ink);padding:10px 22px;font-weight:900;cursor:pointer;font-size:14px}
+.ed-act .ok{background:var(--ink);color:var(--yellow)}
+.ed-act .ok:hover{background:var(--red);color:#fff}
+.ed-act .no{background:var(--cream)}
+#edErr{color:var(--red);font-weight:800;font-size:13px}
+.hint{font-weight:500;font-size:11px;opacity:.75}
+
+@media (max-width:640px){
+  #gramo{transform:scale(.58)}
+  #tray{bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 178px)}
+  #app[data-v=galaxy] #gramo{bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 56px)}
+  #app[data-v=galaxy] #tray{bottom:calc(max(8px,env(safe-area-inset-bottom,0px)) + 232px)}
+  #app[data-v=galaxy] .empty{bottom:auto;top:64px;font-size:12px}
+  .ed{grid-template-columns:1fr}
+  .ed-prev{flex-direction:row;justify-content:center}
+  .ed-prev .sleeve,.ed-prev .disc{width:120px}
+  .back{padding:8px 12px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+
+<div id="app" dir="rtl" lang="fa" data-v="home">
+
+  <section id="home" class="view" aria-label="صفحه اصلی">
+    <button class="logo-btn" id="enterWin" aria-label="ورود به آنالوگ رکوردز">
+      <img src="assets/analog-logo.png" alt="آنالوگ رکوردز">
+    </button>
+  </section>
+
+  <section id="win" class="view" aria-label="دفتر خاطرات هفته‌های نیما">
+    <button class="back" data-back>بازگشت</button>
+    <button class="nb" id="enterGalaxy" aria-label="باز کردن دفتر خاطرات هفته‌های نیما">
+      <span class="nb-shadow"></span>
+      <span class="nb-pages"><i class="lines"></i></span>
+      <span class="nb-cover">
+        <span class="face front">
+          <span class="stitch"></span>
+          <span class="patch"><img src="assets/nima-logo.png" alt="خاطرات هفته‌های نیما"></span>
+          <span class="cap">آنالوگ رکوردز</span>
+          <span class="band"><b></b></span>
+          <span class="spine"><i></i><i></i><i></i><i></i></span>
+        </span>
+        <span class="face back"><i class="lines"></i></span>
+      </span>
+    </button>
+    <p class="nb-hint">دفتر را باز کن</p>
+  </section>
+
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <section id="galaxy" class="view" aria-label="خاطرات هفته‌های نیما">
+    <button class="back" data-back>بازگشت</button>
+    <div id="field">
+      <div id="logoBlock"><span class="gnd"></span><img src="assets/nima-logo.png" alt="خاطرات هفته‌های نیما"></div>
+    </div>
+    <div id="empty" class="empty" hidden>هنوز نوتی نیست. پایین بنویس؛ نوت‌ها از بالا راست پشت‌سرهم چیده می‌شن. با ⠿ جابجا کن، با ✎ ویرایش و با × حذف.</div>
+    <form class="compose" id="compose" autocomplete="off">
+      <input id="noteIn" type="text" maxlength="60" placeholder="یه نوت بنویس و اضافه‌ش کن…" aria-label="نوشتن نوت جدید">
+      <button type="submit" aria-label="افزودن نوت">+</button>
+    </form>
+  </section>
+
+  <!-- gramophone: lives above every view -->
+  <div id="gramo" data-v="home" aria-label="گرامافون">
+    <svg class="g-horn" viewBox="0 0 300 190" aria-hidden="true">
+      <path d="M196 150 C150 140 118 118 74 78 L152 14 C170 60 188 100 214 140 Z" fill="#c62a00" stroke="#0d0d06" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="112" cy="46" rx="62" ry="50" transform="rotate(-32 112 46)" fill="#0d0d06" stroke="#0d0d06" stroke-width="3"/>
+      <ellipse cx="112" cy="46" rx="54" ry="42" transform="rotate(-32 112 46)" fill="#c62a00"/>
+      <g fill="#eae8c9">
+        <circle cx="112" cy="46" r="16"/><circle cx="82" cy="62" r="9"/><circle cx="140" cy="28" r="9"/>
+        <circle cx="96" cy="30" r="5.5"/><circle cx="130" cy="64" r="5.5"/><circle cx="68" cy="44" r="3.5"/><circle cx="156" cy="50" r="3.5"/>
+        <circle cx="118" cy="14" r="3"/><circle cx="104" cy="80" r="3"/>
+      </g>
+      <rect x="190" y="132" width="34" height="26" fill="#0d0d06"/>
+    </svg>
+    <div class="g-box"></div>
+    <div class="g-slab"></div>
+    <div class="g-tilt" id="tilt"><div class="ph"></div><div id="platDisc"></div></div>
+    <svg class="g-arm" viewBox="0 0 300 230" aria-hidden="true">
+      <circle cx="244" cy="132" r="13" fill="#eae8c9" stroke="#0d0d06" stroke-width="3"/>
+      <g class="arm">
+        <path d="M244 132 L158 150" stroke="#0d0d06" stroke-width="9" stroke-linecap="round"/>
+        <path d="M244 132 L158 150" stroke="#eae8c9" stroke-width="3.5" stroke-linecap="round"/>
+        <rect x="140" y="143" width="26" height="14" fill="#0d0d06" transform="rotate(15 153 150)"/>
+        <rect x="224" y="124" width="26" height="16" fill="#c62a00" stroke="#0d0d06" stroke-width="3"/>
+      </g>
+      <circle cx="244" cy="132" r="5" fill="#0d0d06"/>
+    </svg>
+    <div class="g-btns">
+      <button id="gPlay" type="button" aria-label="پخش یا مکث">پخش</button>
+      <button id="gTray" type="button" aria-expanded="false" aria-label="باز کردن دیسک‌ها">دیسک‌ها</button>
+      <button id="gMute" type="button" aria-pressed="false" aria-label="بی‌صدا">بی‌صدا</button>
+    </div>
+    <div class="g-stat" id="gStat">دیسکی روی گرامافون نیست</div>
+  </div>
+
+  <div id="tray" role="dialog" aria-label="دیسک‌ها">
+    <div class="t-head"><h2>دیسک‌های من</h2><small>کلیک یا کشیدن روی صفحه‌ی گرامافون · راست‌کلیک: ویرایش و حذف</small></div>
+    <div class="t-row" id="tRow"></div>
+  </div>
+
+  <div id="ctx" role="menu"></div>
+
+  <div id="modal" role="dialog" aria-modal="true" aria-label="ساخت دیسک">
+    <form class="ed" id="edForm" autocomplete="off">
+      <h2 id="edTitle">دیسک جدید</h2>
+      <div class="ed-prev">
+        <div class="sleeve" id="pvSleeve" data-p="dots"><span class="sname"></span></div>
+        <div class="disc" id="pvDisc"><div class="dv"><span class="lab"><b></b></span></div></div>
+      </div>
+      <div class="ed-form">
+        <label>نام دیسک<input id="fName" type="text" maxlength="28" placeholder="مثلاً هفته‌ی اول"></label>
+        <div><div class="hint" style="margin-bottom:6px">رنگ‌های آماده</div><div class="presets" id="presets"></div></div>
+        <div class="cgrid">
+          <label>رنگ صفحه<input id="fVinyl" type="color"></label>
+          <label>رنگ دور دیسک<input id="fRim" type="color"></label>
+          <label>رنگ لیبل وسط<input id="fLabel" type="color"></label>
+          <label>رنگ نوشته‌ی لیبل<input id="fLabelInk" type="color"></label>
+          <label>رنگ کاور<input id="fCover" type="color"></label>
+          <label>رنگ نوشته‌ی کاور<input id="fCoverInk" type="color"></label>
+        </div>
+        <div class="cgrid">
+          <label>طرح کاور<select id="fPattern"><option value="plain">ساده</option><option value="dots">نقطه‌ای</option><option value="stripes">راه‌راه</option><option value="checks">شطرنجی</option></select></label>
+          <label>شیارها<select id="fGroove"><option value="fine">ریز</option><option value="mid">متوسط</option><option value="wide">درشت</option><option value="solid">صاف</option></select></label>
+        </div>
+        <label>عکس کاور (اختیاری)<input id="fCoverImg" type="file" accept="image/*"></label>
+        <label class="chk"><input id="fLabelImg" type="checkbox"> عکس کاور روی لیبل دیسک هم باشد</label>
+        <label class="chk"><input id="fClearImg" type="checkbox"> حذف عکس کاور</label>
+        <label>آهنگ<input id="fSong" type="file" accept="audio/*,video/mp4"><span class="hint" id="fSongName"></span></label>
+      </div>
+      <div class="ed-act">
+        <button class="ok" type="submit">ذخیره</button>
+        <button class="no" type="button" id="edCancel">انصراف</button>
+        <span id="edErr" role="alert"></span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>// نوت‌های پیش‌فرض نداریم؛ فقط نوت‌هایی که خودت توی صفحه‌ی آخر می‌نویسی نمایش داده می‌شن.
+window.ANALOG_NOTES = [];
+</script>
+<script>
+(() => {
+  const $ = s => document.querySelector(s);
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const uid = () => Math.random().toString(36).slice(2, 9);
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+
+  /* =========================================================
+     SHARED AUDIO: one context, one master (mute applies to everything)
+  ========================================================= */
+  const AU = {
+    ctx: null, master: null, muted: false,
+    ensure() {
+      if (!this.ctx) {
+        const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return false;
+        const c = this.ctx = new AC();
+        this.master = c.createGain(); this.master.gain.value = this.muted ? 0 : .9;
+        const comp = c.createDynamicsCompressor(); this.master.connect(comp); comp.connect(c.destination);
+        this.an = c.createAnalyser(); this.an.fftSize = 1024; comp.connect(this.an);
+      }
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+      return true;
+    },
+    setMuted(m) { this.muted = m; if (this.master) this.master.gain.setTargetAtTime(m ? 0 : .9, this.ctx.currentTime, .06); },
+    noiseBuf(kind, sec) {
+      const c = this.ctx, len = Math.floor(c.sampleRate * sec), b = c.createBuffer(2, len, c.sampleRate);
+      for (let ch = 0; ch < 2; ch++) {
+        const d = b.getChannelData(ch); let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0, last = 0;
+        for (let i = 0; i < len; i++) {
+          const w = Math.random() * 2 - 1;
+          if (kind === 'white') d[i] = w;
+          else if (kind === 'pink') {
+            b0 = .99886 * b0 + w * .0555179; b1 = .99332 * b1 + w * .0750759; b2 = .969 * b2 + w * .153852;
+            b3 = .8665 * b3 + w * .3104856; b4 = .55 * b4 + w * .5329522; b5 = -.7616 * b5 - w * .016898;
+            d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * .5362) * .11; b6 = w * .115926;
+          } else { last = (last + .02 * w) / 1.02; d[i] = last * 3.5; }
+        }
+        // crossfade the loop seam so it never clicks
+        const f = Math.floor(c.sampleRate * .05);
+        for (let i = 0; i < f; i++) { const k = i / f; d[i] = d[i] * k + d[len - f + i] * (1 - k); }
+      }
+      return b;
+    }
+  };
+
+  /* =========================================================
+     AMBIENCE (galaxy only): deep sub drone, soft pink-noise
+     breathing, airy white noise, slow pad, distant swells
+  ========================================================= */
+  const Amb = {
+    on: false, nodes: [], out: null, ev: 0,
+    start() {
+      if (this.on || !AU.ensure()) return;
+      this.on = true; const c = AU.ctx, nodes = this.nodes = [];
+      const out = this.out = c.createGain(); out.gain.value = 0; out.connect(AU.master);
+      const ir = c.createBuffer(2, c.sampleRate * 5, c.sampleRate);
+      for (let ch = 0; ch < 2; ch++) { const d = ir.getChannelData(ch); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2.8); }
+      const rv = this.rv = c.createConvolver(); rv.buffer = ir; const rvg = c.createGain(); rvg.gain.value = .8; rv.connect(rvg); rvg.connect(out);
+      const dry = this.dry = c.createGain(); dry.connect(out);
+      const loop = buf => { const s = c.createBufferSource(); s.buffer = buf; s.loop = true; s.start(); nodes.push(s); return s; };
+      const lfo = (f, depth, target) => { const o = c.createOscillator(); o.frequency.value = f; const g = c.createGain(); g.gain.value = depth; o.connect(g); g.connect(target); o.start(); nodes.push(o); };
+      const filt = (type, f, q = .7) => { const b = c.createBiquadFilter(); b.type = type; b.frequency.value = f; b.Q.value = q; return b; };
+      // pink noise bed that slowly breathes
+      const pf = filt('lowpass', 1000, .5), pg = c.createGain(); pg.gain.value = .2;
+      lfo(.045, 380, pf.frequency); loop(AU.noiseBuf('pink', 10)).connect(pf); pf.connect(pg); pg.connect(dry);
+      const ps = c.createGain(); ps.gain.value = .25; pg.connect(ps); ps.connect(rv);
+      // soft white air
+      const wh = filt('highpass', 3400), wl = filt('lowpass', 9500), wg = c.createGain(); wg.gain.value = .014;
+      lfo(.09, .006, wg.gain); loop(AU.noiseBuf('white', 6)).connect(wh); wh.connect(wl); wl.connect(wg); wg.connect(dry);
+      // brown rumble
+      const bl = filt('lowpass', 120), bg = c.createGain(); bg.gain.value = .45; loop(AU.noiseBuf('brown', 8)).connect(bl); bl.connect(bg); bg.connect(dry);
+      // sub drone with slow beating
+      const dl = filt('lowpass', 210);
+      [[36.71, .2], [36.93, .16], [55, .1], [73.42, .05]].forEach(([f, v], i) => {
+        const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = f; const g = c.createGain(); g.gain.value = v;
+        lfo(.05 + i * .017, v * .35, g.gain); o.connect(g); g.connect(dl); o.start(); nodes.push(o);
+      });
+      dl.connect(dry);
+      // slow pad, mostly reverb
+      const pl = filt('lowpass', 780);
+      [[110, .016], [164.81, .012], [220, .009], [329.63, .006]].forEach(([f, v], i) => {
+        const o = c.createOscillator(); o.type = 'sine'; o.frequency.value = f; const g = c.createGain(); g.gain.value = v;
+        lfo(.03 + i * .021, v * .8, g.gain); o.connect(g); g.connect(pl); o.start(); nodes.push(o);
+      });
+      pl.connect(rv); const pd = c.createGain(); pd.gain.value = .3; pl.connect(pd); pd.connect(dry);
+      out.gain.setTargetAtTime(.14, c.currentTime, 2.2);
+      this.ev = setTimeout(() => this.event(), 7000);
+    },
+    event() {
+      if (!this.on) return; const c = AU.ctx, t = c.currentTime;
+      if (Math.random() < .65) {   // distant swell
+        const f = [146.83, 196, 220, 246.94, 293.66][Math.floor(Math.random() * 5)], o = c.createOscillator(), g = c.createGain();
+        o.type = 'sine'; o.frequency.value = f; g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.03, t + 3.5); g.gain.exponentialRampToValueAtTime(.0004, t + 11);
+        o.connect(g); g.connect(this.rv); const gd = c.createGain(); gd.gain.value = .35; g.connect(gd); gd.connect(this.dry); o.start(t); o.stop(t + 12);
+      } else {   // slow whoosh
+        const s = c.createBufferSource(); s.buffer = AU.noiseBuf('pink', 7); const b = c.createBiquadFilter(); b.type = 'bandpass'; b.Q.value = 5;
+        b.frequency.setValueAtTime(240, t); b.frequency.exponentialRampToValueAtTime(950, t + 6);
+        const g = c.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.05, t + 3); g.gain.linearRampToValueAtTime(0, t + 6.5);
+        s.connect(b); b.connect(g); g.connect(this.rv); g.connect(this.dry); s.start(t); s.stop(t + 7);
+      }
+      this.ev = setTimeout(() => this.event(), rand(12000, 26000));
+    },
+    stop() {
+      if (!this.on) return; this.on = false; clearTimeout(this.ev);
+      const c = AU.ctx, out = this.out, nodes = this.nodes;
+      out.gain.cancelScheduledValues(c.currentTime); out.gain.setTargetAtTime(0, c.currentTime, .35);
+      setTimeout(() => { nodes.forEach(n => { try { n.stop(); } catch (e) {} }); try { out.disconnect(); } catch (e) {} }, 1800);
+    }
+  };
+
+  /* =========================================================
+     DISC STORE (IndexedDB, with in-memory fallback)
+  ========================================================= */
+  const DB = {
+    db: null, mem: new Map(),
+    async open() {
+      try {
+        this.db = await new Promise((res, rej) => {
+          const r = indexedDB.open('analog-records', 1);
+          r.onupgradeneeded = () => r.result.createObjectStore('discs', { keyPath: 'id' });
+          r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error); r.onblocked = () => rej(new Error('blocked'));
+        });
+        const all = await new Promise((res, rej) => { const q = this.db.transaction('discs').objectStore('discs').getAll(); q.onsuccess = () => res(q.result); q.onerror = () => rej(q.error); });
+        all.forEach(d => this.mem.set(d.id, d));
+      } catch (e) { this.db = null; }
+    },
+    put(d) {
+      this.mem.set(d.id, d);
+      if (this.db) try { this.db.transaction('discs', 'readwrite').objectStore('discs').put(d); } catch (e) {}
+    },
+    del(id) {
+      this.mem.delete(id);
+      if (this.db) try { this.db.transaction('discs', 'readwrite').objectStore('discs').delete(id); } catch (e) {}
+    },
+    list() { return [...this.mem.values()].sort((a, b) => a.order - b.order); }
+  };
+  const DEFAULTS = [
+    { name: 'آهنگ ۱', vinyl: '#14110a', rim: '#c62a00', label: '#eae8c9', labelInk: '#0d0d06', cover: '#c62a00', coverInk: '#eae8c9', pattern: 'dots', groove: 'fine', src: 'audio/track1.mp3' },
+    { name: 'آهنگ ۲', vinyl: '#1b1f3a', rim: '#4352c4', label: '#ffd60a', labelInk: '#0d0d06', cover: '#4352c4', coverInk: '#eae8c9', pattern: 'stripes', groove: 'mid', src: 'audio/track2.mp3' },
+    { name: 'آهنگ ۳', vinyl: '#0d0d06', rim: '#eae8c9', label: '#c62a00', labelInk: '#eae8c9', cover: '#eae8c9', coverInk: '#0d0d06', pattern: 'plain', groove: 'fine', src: 'audio/track3.mp3' },
+    { name: 'آهنگ ۴', vinyl: '#3a1208', rim: '#ffd60a', label: '#4352c4', labelInk: '#eae8c9', cover: '#0d0d06', coverInk: '#ffd60a', pattern: 'checks', groove: 'wide', src: 'audio/track4.mp3' }
+  ];
+  const PRESETS = [
+    { vinyl: '#14110a', rim: '#c62a00', label: '#eae8c9', labelInk: '#0d0d06', cover: '#c62a00', coverInk: '#eae8c9' },
+    { vinyl: '#1b1f3a', rim: '#4352c4', label: '#ffd60a', labelInk: '#0d0d06', cover: '#4352c4', coverInk: '#eae8c9' },
+    { vinyl: '#0d0d06', rim: '#eae8c9', label: '#c62a00', labelInk: '#eae8c9', cover: '#eae8c9', coverInk: '#0d0d06' },
+    { vinyl: '#3a1208', rim: '#ffd60a', label: '#4352c4', labelInk: '#eae8c9', cover: '#0d0d06', coverInk: '#ffd60a' },
+    { vinyl: '#12301f', rim: '#eae8c9', label: '#ffd60a', labelInk: '#12301f', cover: '#1f6b43', coverInk: '#eae8c9' }
+  ];
+  const GROOVE = { fine: '2px', mid: '4px', wide: '7px', solid: '999px' };
+
+  const Discs = {
+    urls: new Map(),
+    ready: DB.open().then(() => {
+      let seeded = false; try { seeded = localStorage.getItem('analog.seeded') === '1'; } catch (e) {}
+      if (!seeded && !DB.list().length) DEFAULTS.forEach((d, i) => DB.put({ ...d, id: 'def' + (i + 1), order: i }));
+      try { localStorage.setItem('analog.seeded', '1'); } catch (e) {}
+    }),
+    songUrl(d) {
+      if (d.song) { const k = d.id + ':s'; let u = this.urls.get(k); if (!u || u.b !== d.song) { if (u) URL.revokeObjectURL(u.u); u = { b: d.song, u: URL.createObjectURL(d.song) }; this.urls.set(k, u); } return u.u; }
+      return d.src ? ((window.parent&&window.parent.__trk&&window.parent.__trk(d.src))||d.src) : '';
+    },
+    coverUrl(d) {
+      if (!d.coverImg) return '';
+      const k = d.id + ':c'; let u = this.urls.get(k); if (!u || u.b !== d.coverImg) { if (u) URL.revokeObjectURL(u.u); u = { b: d.coverImg, u: URL.createObjectURL(d.coverImg) }; this.urls.set(k, u); } return u.u;
+    },
+    discEl(d, cover) {
+      const el = document.createElement('div'); el.className = 'disc'; el.innerHTML = '<div class="dv"><span class="lab"><b></b></span></div>';
+      this.paintDisc(el, d, cover); return el;
+    },
+    paintDisc(el, d, coverUrl) {
+      const s = el.style; s.setProperty('--vinyl', d.vinyl); s.setProperty('--rim', d.rim); s.setProperty('--label', d.label); s.setProperty('--lci', d.labelInk);
+      s.setProperty('--gw', GROOVE[d.groove] || '3px');
+      const lab = el.querySelector('.lab'); lab.querySelector('b').textContent = d.name || '';
+      lab.style.backgroundImage = d.labelCover && coverUrl ? `url(${coverUrl})` : 'none';
+      lab.querySelector('b').style.display = d.labelCover && coverUrl ? 'none' : 'block';
+    },
+    sleeveEl(d, cover) {
+      const el = document.createElement('div'); el.className = 'sleeve'; el.innerHTML = '<span class="sname"></span>'; this.paintSleeve(el, d, cover); return el;
+    },
+    paintSleeve(el, d, coverUrl) {
+      el.style.setProperty('--cv', d.cover); el.style.setProperty('--ci', d.coverInk); el.dataset.p = d.pattern || 'plain';
+      el.style.backgroundImage = coverUrl ? `url(${coverUrl})` : 'none'; el.dataset.img = coverUrl ? '1' : '0';
+      el.querySelector('.sname').textContent = d.name || '';
+    }
+  };
+
+  /* =========================================================
+     GRAMOPHONE ENGINE: horn-speaker tone, surface noise, pops,
+     wow and flutter, slow warps, dropouts, spin-up
+  ========================================================= */
+  const Gram = {
+    el: null, built: false, disc: null, playing: false, base: 1, dip: 1, drift: 0, T: {}, tw: 0, wobI: 0,
+    build() {
+      if (this.built) return true; if (!AU.ensure()) return false;
+      const c = AU.ctx; this.el = new Audio(); this.el.preload = 'auto'; this.el.preservesPitch = false; this.el.mozPreservesPitch = false; this.el.webkitPreservesPitch = false;
+      const src = c.createMediaElementSource(this.el);
+      const gin = c.createGain();
+      const f = (type, fr, q = .7, g = 0) => { const b = c.createBiquadFilter(); b.type = type; b.frequency.value = fr; b.Q.value = q; b.gain.value = g; return b; };
+      const hp = f('highpass', 330), pk = f('peaking', 900, 1.3, 8), pk2 = f('peaking', 2500, 1, 3), lp = f('lowpass', 3300, 1);
+      const sh = c.createWaveShaper(), cv = new Float32Array(1024); for (let i = 0; i < 1024; i++) { const x = i / 512 - 1; cv[i] = Math.tanh(x * 2.6) / Math.tanh(2.6); } sh.curve = cv; sh.oversample = '2x';
+      const fl = c.createDelay(.05); fl.delayTime.value = .02;
+      [[.5, .0025], [.13, .002]].forEach(([fr, d]) => { const o = c.createOscillator(); o.frequency.value = fr; const g = c.createGain(); g.gain.value = d; o.connect(g); g.connect(fl.delayTime); o.start(); });
+      this.out = c.createGain(); this.out.gain.value = .85;
+      src.connect(gin); gin.connect(hp); hp.connect(pk); pk.connect(pk2); pk2.connect(lp); lp.connect(sh); sh.connect(fl); fl.connect(this.out); this.out.connect(AU.master);
+      const nb = AU.noiseBuf('white', 4);
+      const hs = c.createBufferSource(); hs.buffer = nb; hs.loop = true; const hf = f('bandpass', 3000, .6); this.hiss = c.createGain(); this.hiss.gain.value = 0;
+      hs.connect(hf); hf.connect(this.hiss); this.hiss.connect(gin); hs.start();
+      const cs = c.createBufferSource(); cs.buffer = nb; cs.loop = true; const cf = f('highpass', 1800); this.crk = c.createGain(); this.crk.gain.value = 0;
+      cs.connect(cf); cf.connect(this.crk); this.crk.connect(gin); cs.start();
+      this.el.addEventListener('ended', () => this.ended());
+      this.el.addEventListener('timeupdate', () => { if (this.el.duration) $('#gramo').style.setProperty('--armp', (this.el.currentTime / this.el.duration).toFixed(3)); });
+      return this.built = true;
+    },
+    tween(prop, to, ms, done) {
+      cancelAnimationFrame(this.tw); const from = this[prop], t0 = performance.now();
+      const step = now => { const k = Math.min(1, (now - t0) / ms); this[prop] = from + (to - from) * k; this.applyRate(); if (k < 1) this.tw = requestAnimationFrame(step); else done && done(); };
+      this.tw = requestAnimationFrame(step);
+    },
+    applyRate() {
+      if (!this.el) return; const t = AU.ctx.currentTime;
+      const w = 1 + .006 * Math.sin(6.283 * .6 * t) + .004 * Math.sin(6.283 * 3.3 * t) + this.drift;
+      this.el.playbackRate = Math.min(2, Math.max(.3, this.base * w * this.dip));
+    },
+    pop(a) {
+      const g = this.crk.gain, t = AU.ctx.currentTime; g.cancelScheduledValues(t); g.setValueAtTime(a, t); g.setTargetAtTime(0, t + .003, rand(.004, .012));
+    },
+    popLoop() {
+      if (!this.playing) return; this.pop(rand(.04, .3));
+      if (Math.random() < .12) { for (let i = 1; i < 7; i++) setTimeout(() => this.playing && this.pop(rand(.04, .22)), i * rand(15, 40)); }
+      this.T.pop = setTimeout(() => this.popLoop(), rand(70, 650));
+    },
+    faultLoop() {
+      if (!this.playing) return;
+      this.T.dip = setTimeout(() => { if (!this.playing) return; const to = rand(.9, .96); const d0 = this.dip; this.tw2 = 0;
+        const t0 = performance.now(), run = now => { const k = (now - t0) / 1300; if (!this.playing) { this.dip = 1; return; } this.dip = k < .3 ? d0 + (to - d0) * (k / .3) : k < 1 ? to + (1 - to) * ((k - .3) / .7) : 1; this.applyRate(); if (k < 1) requestAnimationFrame(run); else this.dip = 1; };
+        requestAnimationFrame(run); this.faultLoop(); }, rand(16000, 38000));
+      this.T.drop = setTimeout(() => { if (!this.playing) return; const g = this.out.gain, t = AU.ctx.currentTime; g.cancelScheduledValues(t); g.setValueAtTime(g.value, t); g.linearRampToValueAtTime(.22, t + .03); g.linearRampToValueAtTime(.85, t + rand(.12, .28)); this.pop(.35); }, rand(22000, 52000));
+      this.T.skip = setTimeout(() => { if (this.playing && this.el.currentTime > 1) { this.el.currentTime -= .38; this.pop(.4); } }, rand(45000, 100000));
+    },
+    clearTimers() { Object.values(this.T).forEach(clearTimeout); clearInterval(this.wobI); this.T = {}; },
+    async load(d) {
+      if (!this.build()) return false; this.disc = d; this.el.src = Discs.songUrl(d); this.el.load(); $('#gramo').style.setProperty('--armp', 0); return true;
+    },
+    async play() {
+      if (!this.disc || !this.build()) return; AU.ensure(); if (this.playing) return;
+      this.playing = true; GUI.sync(); this.base = .35; this.dip = 1; this.applyRate();
+      try { await this.el.play(); } catch (e) { this.playing = false; GUI.sync(); return; }
+      if (!this.playing) { this.el.pause(); return; }
+      const t = AU.ctx.currentTime; this.hiss.gain.cancelScheduledValues(t); this.hiss.gain.setTargetAtTime(.014, t, .3);
+      this.pop(.45); this.tween('base', 1, 1500);
+      this.wobI = setInterval(() => { this.drift = Math.max(-.012, Math.min(.012, this.drift + rand(-.0015, .0015))); this.applyRate(); }, 110);
+      this.popLoop(); this.faultLoop();
+    },
+    pause() {
+      if (!this.playing) return; this.playing = false; GUI.sync(); this.clearTimers();
+      const t = AU.ctx.currentTime; this.hiss.gain.cancelScheduledValues(t); this.hiss.gain.setTargetAtTime(0, t, .2); this.pop(.3);
+      this.tween('base', .3, 850, () => { if (!this.playing) { this.el.pause(); this.base = 1; this.dip = 1; this.applyRate(); } });
+    },
+    eject() {
+      this.pause(); this.disc = null;
+      setTimeout(() => { if (!this.disc && this.el) { this.el.pause(); this.el.removeAttribute('src'); this.el.load(); } }, 950);
+    },
+    ended() { this.playing = false; this.clearTimers(); const t = AU.ctx.currentTime; this.hiss.gain.setTargetAtTime(0, t, .3); this.base = 1; this.dip = 1; GUI.sync(); }
+  };
+
+  /* =========================================================
+     GRAMOPHONE + TRAY UI
+  ========================================================= */
+  const GUI = {
+    g: $('#gramo'), tray: $('#tray'), row: $('#tRow'), platEl: null, trayOpen: false,
+    sync() {
+      this.g.classList.toggle('has', !!Gram.disc); this.g.classList.toggle('playing', Gram.playing);
+      $('#gPlay').textContent = Gram.playing ? 'مکث' : 'پخش';
+      $('#gStat').textContent = Gram.disc ? (Gram.playing ? 'در حال پخش: ' : 'روی گرامافون: ') + Gram.disc.name : 'دیسکی روی گرامافون نیست';
+      this.row.querySelectorAll('.ti[data-id]').forEach(t => t.classList.toggle('away', !!Gram.disc && Gram.disc.id === t.dataset.id));
+    },
+    toggleTray(on) {
+      this.trayOpen = on === undefined ? !this.trayOpen : on; this.tray.classList.toggle('open', this.trayOpen);
+      $('#gTray').setAttribute('aria-expanded', this.trayOpen);
+    },
+    renderTray() {
+      this.row.innerHTML = '';
+      DB.list().forEach(d => {
+        const ti = document.createElement('div'); ti.className = 'ti'; ti.dataset.id = d.id; ti.tabIndex = 0; ti.setAttribute('role', 'button'); ti.setAttribute('aria-label', 'دیسک ' + d.name);
+        const st = document.createElement('div'); st.className = 'ti-stack';
+        const wrap = document.createElement('div'); wrap.className = 'ti-disc'; wrap.appendChild(Discs.discEl(d, Discs.coverUrl(d)));
+        st.appendChild(wrap); st.appendChild(Discs.sleeveEl(d, Discs.coverUrl(d)));
+        const nm = document.createElement('div'); nm.className = 'ti-name'; nm.textContent = d.name;
+        ti.append(st, nm); this.row.appendChild(ti); this.bindItem(ti, d);
+      });
+      const add = document.createElement('div'); add.className = 'ti add'; add.tabIndex = 0; add.setAttribute('role', 'button'); add.setAttribute('aria-label', 'ساخت دیسک جدید');
+      add.innerHTML = '<div class="ti-stack"><div class="plus">+</div></div><div class="ti-name">دیسک جدید</div>';
+      add.addEventListener('click', () => Ed.open(null)); add.addEventListener('keydown', e => { if (e.key === 'Enter') Ed.open(null); });
+      this.row.appendChild(add); this.sync();
+    },
+    bindItem(ti, d) {
+      ti.addEventListener('keydown', e => { if (e.key === 'Enter') this.place(d.id); });
+      ti.addEventListener('contextmenu', e => { e.preventDefault(); Menu.open(e.clientX, e.clientY, [['ویرایش دیسک', () => Ed.open(DB.mem.get(d.id))], ['حذف دیسک', () => this.deleteDisc(d.id)]]); });
+      ti.addEventListener('pointerdown', e => {
+        if (e.button !== 0) return; const sx = e.clientX, sy = e.clientY; let drag = false, ghost = null, long = false;
+        const lp = setTimeout(() => { if (!drag) { long = true; Menu.open(sx, sy, [['ویرایش دیسک', () => Ed.open(DB.mem.get(d.id))], ['حذف دیسک', () => this.deleteDisc(d.id)]]); } }, 650);
+        const mv = ev => {
+          if (!drag && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8 && !long) {
+            drag = true; clearTimeout(lp); ghost = document.createElement('div'); ghost.className = 'ghost'; ghost.appendChild(Discs.discEl(DB.mem.get(d.id) || d, Discs.coverUrl(d))); document.body.appendChild(ghost);
+          }
+          if (drag) {
+            ghost.style.left = ev.clientX - 55 + 'px'; ghost.style.top = ev.clientY - 55 + 'px';
+            const r = $('#tilt').getBoundingClientRect(); $('#tilt').classList.toggle('over', ev.clientX > r.left && ev.clientX < r.right && ev.clientY > r.top && ev.clientY < r.bottom);
+          }
+        };
+        const up = ev => {
+          window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); window.removeEventListener('pointercancel', up); clearTimeout(lp);
+          $('#tilt').classList.remove('over');
+          if (long) return;
+          if (drag) {
+            const gr = ghost.getBoundingClientRect(); ghost.remove(); const r = $('#tilt').getBoundingClientRect();
+            if (ev.type === 'pointerup' && ev.clientX > r.left && ev.clientX < r.right && ev.clientY > r.top && ev.clientY < r.bottom) this.place(d.id, gr);
+          } else if (ev.type === 'pointerup') this.place(d.id);
+        };
+        window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up); window.addEventListener('pointercancel', up);
+      });
+    },
+    async fly(d, from, to, toFlat) {   // from/to are DOMRects; platter side is squashed
+      const f = document.createElement('div'); f.className = 'fly'; f.appendChild(Discs.discEl(d, Discs.coverUrl(d)));
+      const w = toFlat ? to.width : from.width, base = toFlat ? to : from;
+      Object.assign(f.style, { left: base.left + 'px', top: base.top + 'px', width: w + 'px', height: w + 'px' });
+      document.body.appendChild(f);
+      const other = toFlat ? from : to, dx = (other.left + other.width / 2) - (base.left + w / 2), dy = (other.top + other.height / 2) - (base.top + w / 2), s = other.width / w;
+      const squash = 'scaleY(.47)', away = `translate(${dx}px,${dy}px) scale(${s}) ${squash}`;
+      const frames = toFlat ? [{ transform: away }, { transform: 'none' }] : [{ transform: 'none' }, { transform: away }];
+      const a = f.animate(frames, { duration: reduced ? 1 : 560, easing: 'cubic-bezier(.3,.7,.3,1)', fill: 'forwards' });
+      try { await a.finished; } catch (e) {} f.remove();
+    },
+    mountPlatter(d) {
+      const holder = $('#platDisc'); holder.innerHTML = ''; if (!d) return null;
+      const el = Discs.discEl(d, Discs.coverUrl(d)); holder.appendChild(el); return el;
+    },
+    async place(id, fromRect) {
+      const d = DB.mem.get(id); if (!d) return; AU.ensure();
+      if (Gram.disc && Gram.disc.id === id) { Gram.playing ? 0 : Gram.play(); return; }
+      if (Gram.disc) await this.remove(true);
+      const ti = this.row.querySelector(`.ti[data-id="${id}"]`);
+      const from = fromRect || (ti ? ti.querySelector('.ti-disc').getBoundingClientRect() : $('#gPlay').getBoundingClientRect());
+      const el = this.mountPlatter(d); el.style.visibility = 'hidden';
+      Gram.disc = d; this.sync();
+      const to = el.getBoundingClientRect();
+      await this.fly(d, from, to, false);
+      el.style.visibility = ''; await Gram.load(d); Gram.play();
+    },
+    async remove(quick) {
+      const d = Gram.disc; if (!d) return;
+      const el = $('#platDisc .disc'), pr = el ? el.getBoundingClientRect() : null;
+      Gram.eject(); if (el) el.style.visibility = 'hidden';
+      if (!this.trayOpen) { this.toggleTray(true); await wait(40); }
+      const ti = this.row.querySelector(`.ti[data-id="${d.id}"]`), tr = ti ? ti.querySelector('.ti-disc').getBoundingClientRect() : null;
+      if (ti) ti.classList.add('away');
+      if (pr && tr) await this.fly(d, tr, pr, true);
+      $('#platDisc').innerHTML = ''; this.sync();
+    },
+    async deleteDisc(id) {
+      if (Gram.disc && Gram.disc.id === id) { Gram.eject(); $('#platDisc').innerHTML = ''; }
+      DB.del(id); this.renderTray();
+    }
+  };
+  $('#gPlay').addEventListener('click', () => { AU.ensure(); if (!Gram.disc) { GUI.toggleTray(true); return; } Gram.playing ? Gram.pause() : Gram.play(); });
+  $('#gTray').addEventListener('click', () => GUI.toggleTray());
+  $('#gMute').addEventListener('click', e => { AU.ensure(); const m = !AU.muted; AU.setMuted(m); e.currentTarget.setAttribute('aria-pressed', m); e.currentTarget.textContent = m ? 'پخش صدا' : 'بی‌صدا'; });
+  $('#tilt').addEventListener('contextmenu', e => {
+    e.preventDefault(); if (!Gram.disc) return;
+    Menu.open(e.clientX, e.clientY, [['حذف', () => GUI.remove()]]);
+  });
+  (() => {   // long-press on the platter for touch screens
+    let t = 0; const el = $('#tilt');
+    el.addEventListener('pointerdown', e => { if (e.pointerType === 'mouse' || !Gram.disc) return; t = setTimeout(() => Menu.open(e.clientX, e.clientY, [['حذف', () => GUI.remove()]]), 600); });
+    ['pointerup', 'pointercancel', 'pointermove'].forEach(n => el.addEventListener(n, () => clearTimeout(t)));
+  })();
+
+  /* ---------- context menu ---------- */
+  const Menu = {
+    el: $('#ctx'),
+    open(x, y, items) {
+      this.el.innerHTML = ''; items.forEach(([label, fn]) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'menuitem'); b.textContent = label; b.addEventListener('click', () => { this.close(); fn(); }); this.el.appendChild(b); });
+      this.el.classList.add('open'); const w = this.el.offsetWidth, h = this.el.offsetHeight;
+      this.el.style.left = Math.min(x, innerWidth - w - 8) + 'px'; this.el.style.top = Math.min(y, innerHeight - h - 8) + 'px'; this.el.firstChild.focus();
+    },
+    close() { this.el.classList.remove('open'); }
+  };
+  addEventListener('pointerdown', e => { if (!e.target.closest('#ctx')) Menu.close(); });
+  addEventListener('blur', () => Menu.close());
+
+  /* ---------- disc editor ---------- */
+  const Ed = {
+    el: $('#modal'), cur: null, pend: { song: null, cover: null }, tmpCover: '',
+    F: { name: $('#fName'), vinyl: $('#fVinyl'), rim: $('#fRim'), label: $('#fLabel'), labelInk: $('#fLabelInk'), cover: $('#fCover'), coverInk: $('#fCoverInk'), pattern: $('#fPattern'), groove: $('#fGroove') },
+    init() {
+      const pr = $('#presets');
+      PRESETS.forEach(p => { const b = document.createElement('button'); b.type = 'button'; b.title = 'رنگ آماده'; b.setAttribute('aria-label', 'رنگ آماده'); b.style.background = `conic-gradient(${p.rim} 0 25%,${p.vinyl} 0 50%,${p.cover} 0 75%,${p.label} 0)`; b.addEventListener('click', () => { Object.keys(p).forEach(k => this.F[k].value = p[k]); this.preview(); }); pr.appendChild(b); });
+      Object.values(this.F).forEach(i => i.addEventListener('input', () => this.preview()));
+      $('#fLabelImg').addEventListener('change', () => this.preview());
+      $('#fClearImg').addEventListener('change', () => this.preview());
+      $('#fCoverImg').addEventListener('change', e => { this.pend.cover = e.target.files[0] || null; if (this.tmpCover) URL.revokeObjectURL(this.tmpCover); this.tmpCover = this.pend.cover ? URL.createObjectURL(this.pend.cover) : ''; $('#fClearImg').checked = false; this.preview(); });
+      $('#fSong').addEventListener('change', e => { this.pend.song = e.target.files[0] || null; $('#fSongName').textContent = this.pend.song ? this.pend.song.name : (this.cur && this.cur.songName) || ''; });
+      $('#edCancel').addEventListener('click', () => this.close());
+      this.el.addEventListener('pointerdown', e => { if (e.target === this.el) this.close(); });
+      $('#edForm').addEventListener('submit', e => { e.preventDefault(); this.save(); });
+    },
+    open(d) {
+      this.cur = d; this.pend = { song: null, cover: null }; if (this.tmpCover) URL.revokeObjectURL(this.tmpCover); this.tmpCover = '';
+      const base = d || { name: '', ...PRESETS[Math.floor(Math.random() * PRESETS.length)], pattern: 'dots', groove: 'fine' };
+      Object.keys(this.F).forEach(k => this.F[k].value = base[k] || ''); $('#fLabelImg').checked = !!base.labelCover; $('#fClearImg').checked = false;
+      $('#fCoverImg').value = ''; $('#fSong').value = ''; $('#fSongName').textContent = d ? (d.songName || (d.src ? 'آهنگ پیش‌فرض' : '')) : ''; $('#edErr').textContent = '';
+      $('#edTitle').textContent = d ? 'ویرایش دیسک' : 'دیسک جدید'; this.el.classList.add('open'); this.preview(); this.F.name.focus();
+    },
+    close() { this.el.classList.remove('open'); },
+    spec() {
+      const v = {}; Object.keys(this.F).forEach(k => v[k] = this.F[k].value); v.labelCover = $('#fLabelImg').checked; return v;
+    },
+    coverNow() { if ($('#fClearImg').checked) return ''; return this.tmpCover || (this.cur ? Discs.coverUrl(this.cur) : ''); },
+    preview() {
+      const s = this.spec(), cu = this.coverNow(); s.name = s.name || 'نام دیسک';
+      Discs.paintSleeve($('#pvSleeve'), s, cu); Discs.paintDisc($('#pvDisc'), s, cu);
+    },
+    save() {
+      const s = this.spec(); s.name = s.name.trim() || 'بدون نام';
+      const song = this.pend.song || (this.cur && this.cur.song), src = this.cur && this.cur.src;
+      if (!song && !src) { $('#edErr').textContent = 'یک فایل آهنگ انتخاب کن.'; return; }
+      const d = { ...(this.cur || {}), ...s, id: this.cur ? this.cur.id : uid(), order: this.cur ? this.cur.order : Date.now() };
+      if (this.pend.song) { d.song = this.pend.song; d.songName = this.pend.song.name; delete d.src; }
+      if ($('#fClearImg').checked) delete d.coverImg; else if (this.pend.cover) d.coverImg = this.pend.cover;
+      DB.put(d); GUI.renderTray();
+      if (Gram.disc && Gram.disc.id === d.id) {
+        const was = Gram.playing, songChanged = !!this.pend.song; Gram.disc = d;
+        GUI.mountPlatter(d); if (songChanged) { Gram.pause(); setTimeout(async () => { await Gram.load(d); if (was) Gram.play(); }, 950); }
+        GUI.sync();
+      }
+      this.close(); GUI.toggleTray(true);
+    }
+  };
+  Ed.init();
+
+  /* =========================================================
+     STARFIELD (black & white)
+  ========================================================= */
+  const Stars = {
+    cv: $('#stars'), run: false, st: [], neb: [], shoot: null, t0: 0,
+    resize() {
+      const dpr = Math.min(devicePixelRatio || 1, 2), w = innerWidth, h = innerHeight;
+      this.cv.width = w * dpr; this.cv.height = h * dpr; this.dpr = dpr; this.w = w; this.h = h;
+      const n = Math.floor(w * h / 5500);
+      this.st = Array.from({ length: n }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() ** 3 * 1.5 + .3, p: Math.random() * 6.28, s: rand(.4, 1.6), v: rand(.01, .08) }));
+      this.neb = Array.from({ length: 5 }, () => ({ x: Math.random() * w, y: Math.random() * h, r: rand(.25, .55) * Math.max(w, h), a: rand(.025, .06), vx: rand(-.01, .01) }));
+    },
+    draw(now) {
+      if (!this.run) return;
+      const g = this.cv.getContext('2d'), { w, h, dpr } = this;
+      g.setTransform(dpr, 0, 0, dpr, 0, 0); g.fillStyle = '#000'; g.fillRect(0, 0, w, h);
+      const t = (now - this.t0) / 1000;
+      for (const n of this.neb) {
+        n.x += n.vx; const gr = g.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+        gr.addColorStop(0, `rgba(255,255,255,${n.a})`); gr.addColorStop(1, 'rgba(255,255,255,0)');
+        g.fillStyle = gr; g.fillRect(0, 0, w, h);
+      }
+      for (const s of this.st) {
+        s.y += s.v; if (s.y > h + 2) { s.y = -2; s.x = Math.random() * w; }
+        const a = .35 + .65 * (.5 + .5 * Math.sin(t * s.s + s.p));
+        g.fillStyle = `rgba(255,255,255,${a})`; g.beginPath(); g.arc(s.x, s.y, s.r, 0, 6.283); g.fill();
+      }
+      if (!this.shoot && Math.random() < .004) this.shoot = { x: Math.random() * w, y: Math.random() * h * .5, l: 0 };
+      if (this.shoot) {
+        const s = this.shoot; s.l += 1; const x = s.x + s.l * 9, y = s.y + s.l * 4;
+        const gr = g.createLinearGradient(x, y, x - 90, y - 40); gr.addColorStop(0, 'rgba(255,255,255,.9)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+        g.strokeStyle = gr; g.lineWidth = 1.5; g.beginPath(); g.moveTo(x, y); g.lineTo(x - 90, y - 40); g.stroke();
+        if (s.l > 40) this.shoot = null;
+      }
+      if (!reduced) requestAnimationFrame(n => this.draw(n));
+    },
+    start() { this.resize(); this.cv.classList.add('on'); this.run = true; this.t0 = performance.now(); requestAnimationFrame(n => this.draw(n)); },
+    stop() { this.run = false; this.cv.classList.remove('on'); }
+  };
+
+  /* =========================================================
+     NOTE SQUARES: ordered from the top-right, editable, movable
+  ========================================================= */
+  (() => {   // speckle mask so the yellow text has a dusty look
+    try {
+      const c = document.createElement('canvas'); c.width = c.height = 160;
+      const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, 160, 160);
+      g.globalCompositeOperation = 'destination-out';
+      for (let i = 0; i < 260; i++) { g.globalAlpha = rand(.5, 1); g.fillRect(Math.random() * 160, Math.random() * 160, Math.random() < .85 ? 1 : 2, 1); }
+      document.documentElement.style.setProperty('--grain', `url(${c.toDataURL()})`);
+    } catch (e) { document.documentElement.style.setProperty('--grain', 'none'); }
+  })();
+
+  const Notes = {
+    field: $('#field'), logo: $('#logoBlock'), items: [], els: new Map(), on: false, glitchT: 0, drag: null,
+    load() {
+      let a = null;
+      try { a = JSON.parse(localStorage.getItem('analog.notes2') || 'null'); } catch (e) {}
+      if (!Array.isArray(a)) { try { a = JSON.parse(localStorage.getItem('analog.notes') || '[]').filter(x => typeof x === 'string').map(t => ({ text: t })); } catch (e) { a = []; } }
+      this.items = a.filter(x => x && typeof x.text === 'string' && x.text.trim()).map(x => ({ id: x.id || uid(), text: x.text }));
+    },
+    save() { try { localStorage.setItem('analog.notes2', JSON.stringify(this.items)); } catch (e) {} },
+    hint() { $('#empty').hidden = this.items.length > 0; },
+    layout() {
+      const W = this.field.clientWidth, narrow = W < 520, gap = narrow ? 10 : 12;
+      const S = narrow ? Math.floor((W - 2 * gap) / 3) : W < 900 ? 150 : W < 1400 ? 175 : 200;
+      let cols = Math.max(3, Math.floor((W + gap) / (S + gap))); if (cols % 2 === 0) cols--; cols = Math.min(cols, 11);
+      this.S = S; this.gap = gap; this.pitch = S + gap; this.cols = cols;
+      this.x0 = (W - (cols * this.pitch - gap)) / 2; this.top = 78; this.c0 = (cols - 3) / 2; this.r0 = 1;
+      const size = 3 * this.pitch - gap;
+      Object.assign(this.logo.style, { left: this.x0 + this.c0 * this.pitch + 'px', top: this.top + this.r0 * this.pitch + 'px', width: size + 'px', height: size + 'px' });
+    },
+    isLogo(c, r) { return c >= this.c0 && c < this.c0 + 3 && r >= this.r0 && r < this.r0 + 3; },
+    slots(n) {
+      const out = [];
+      for (let r = 0; out.length < n; r++) for (let c = this.cols - 1; c >= 0 && out.length < n; c--) if (!this.isLogo(c, r)) out.push({ c, r });
+      return out;
+    },
+    place() {
+      const sl = this.slots(this.items.length + 1);
+      this.items.forEach((it, i) => {
+        const el = this.els.get(it.id); if (!el || (this.drag && this.drag.el === el)) return;
+        Object.assign(el.style, { left: this.x0 + sl[i].c * this.pitch + 'px', top: this.top + sl[i].r * this.pitch + 'px', width: this.S + 'px', height: this.S + 'px' });
+      });
+      const last = sl[sl.length - 1];
+      this.field.style.height = Math.max(innerHeight, this.top + (Math.max(4, last.r) + 2) * this.pitch + 330) + 'px';
+    },
+    setText(el, text, type = true) {
+      const txt = el.querySelector('.txt');
+      txt.innerHTML = text.split(/\s+/).map(w => `<span class="w">${w.replace(/[<>&]/g, '')}</span>`).join(' ');
+      let fs = Math.max(13, this.S * .17); txt.style.fontSize = fs + 'px';
+      while (txt.scrollHeight > this.S * .8 && fs > 10) { fs -= 1; txt.style.fontSize = fs + 'px'; }
+      const spans = [...txt.children]; let i = 0;
+      const tick = () => { if (!el.isConnected) return; if (i < spans.length) { spans[i++].classList.add('on'); setTimeout(tick, reduced || !type ? 0 : rand(90, 200)); } };
+      setTimeout(tick, type ? 300 : 0);
+    },
+    make(it) {
+      if (this.els.has(it.id)) return;
+      const el = document.createElement('div'); el.className = 'note'; el.dataset.id = it.id;
+      el.innerHTML = '<div class="ctl"><button class="hd" title="جابجایی" aria-label="جابجایی نوت">⠿</button><button class="ed" title="ویرایش" aria-label="ویرایش نوت">✎</button><button class="rm" title="حذف" aria-label="حذف نوت">×</button></div><div class="txt"></div>';
+      this.field.appendChild(el); this.els.set(it.id, el);
+      this.place(); this.setText(el, it.text);
+      el.addEventListener('pointerenter', () => { if (!this.drag) this.glitch(el); });
+      el.addEventListener('click', e => { if (e.target.closest('.ctl,textarea')) return; const was = el.classList.contains('sel'); this.field.querySelectorAll('.sel').forEach(n => n.classList.remove('sel')); if (!was) el.classList.add('sel'); });
+      el.querySelector('.rm').addEventListener('click', () => this.remove(it.id));
+      el.querySelector('.ed').addEventListener('click', () => this.edit(it.id));
+      const hd = el.querySelector('.hd');
+      hd.addEventListener('pointerdown', e => this.dragStart(e, it.id, hd));
+      hd.addEventListener('pointermove', e => this.dragMove(e));
+      hd.addEventListener('pointerup', e => this.dragEnd(e, hd));
+      hd.addEventListener('pointercancel', e => this.dragEnd(e, hd));
+    },
+    add(text) {
+      const it = { id: uid(), text }; this.items.push(it); this.save(); this.hint();
+      if (!this.on) return; this.make(it);
+      const el = this.els.get(it.id); setTimeout(() => el.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' }), 80);
+    },
+    remove(id) {
+      const k = this.items.findIndex(x => x.id === id); if (k < 0) return;
+      this.items.splice(k, 1); this.save(); this.hint();
+      const el = this.els.get(id); this.els.delete(id);
+      if (el) { el.classList.add('out'); setTimeout(() => el.remove(), 600); }
+      this.place();
+    },
+    edit(id) {
+      const it = this.items.find(x => x.id === id), el = this.els.get(id); if (!it || !el || el.querySelector('textarea')) return;
+      const ta = document.createElement('textarea'); ta.className = 'edit'; ta.value = it.text; ta.maxLength = 60; ta.setAttribute('aria-label', 'ویرایش متن نوت');
+      el.querySelector('.txt').hidden = true; el.appendChild(ta); ta.focus(); ta.select();
+      let done = false;
+      const end = save => {
+        if (done) return; done = true;
+        const v = ta.value.trim(); ta.remove(); el.querySelector('.txt').hidden = false;
+        if (save && v && v !== it.text) { it.text = v; this.save(); this.setText(el, v); }
+      };
+      ta.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); end(true); } else if (e.key === 'Escape') { e.stopPropagation(); end(false); } });
+      ta.addEventListener('blur', () => end(true));
+    },
+    dragStart(e, id, hd) {
+      e.preventDefault(); const el = this.els.get(id), r = el.getBoundingClientRect();
+      this.drag = { id, el, ox: e.clientX - r.left, oy: e.clientY - r.top };
+      el.classList.add('drag'); el.classList.remove('sel'); hd.setPointerCapture(e.pointerId);
+    },
+    dragMove(e) {
+      const d = this.drag; if (!d) return;
+      const fr = this.field.getBoundingClientRect(), g = $('#galaxy');
+      d.el.style.left = (e.clientX - fr.left - d.ox) + 'px'; d.el.style.top = (e.clientY - fr.top - d.oy) + 'px';
+      if (e.clientY < 90) g.scrollTop -= 14; else if (e.clientY > innerHeight - 90) g.scrollTop += 14;
+      const px = e.clientX - fr.left, py = e.clientY - fr.top;
+      const col = Math.floor((px - this.x0) / this.pitch), row = Math.floor((py - this.top) / this.pitch);
+      const sl = this.slots(this.items.length);
+      let idx = sl.findIndex(s => s.c === col && s.r === row);
+      if (idx < 0 && row > sl[sl.length - 1].r) idx = sl.length - 1;
+      const from = this.items.findIndex(x => x.id === d.id);
+      if (idx >= 0 && idx !== from) { const [it] = this.items.splice(from, 1); this.items.splice(idx, 0, it); this.place(); }
+    },
+    dragEnd(e, hd) {
+      const d = this.drag; if (!d) return;
+      this.drag = null; d.el.classList.remove('drag'); try { hd.releasePointerCapture(e.pointerId); } catch (x) {}
+      this.save(); this.place();
+    },
+    glitch(el) {
+      el.classList.remove('glitch'); void el.offsetWidth; el.classList.add('glitch');
+      for (let i = 0; i < 3; i++) {
+        const s = document.createElement('i'); s.className = 'streak';
+        s.style.cssText = `top:${rand(10, 90)}%;left:${rand(-10, 60)}%;width:${rand(20, 60)}%;background:${Math.random() < .7 ? '#ffd60a' : '#19ff7a'}`;
+        el.appendChild(s); setTimeout(() => s.remove(), 320);
+      }
+      setTimeout(() => el.classList.remove('glitch'), 320);
+    },
+    start() {
+      this.stop(); this.on = true; this.load(); this.layout(); this.hint(); this.place();
+      this.items.slice().forEach((it, i) => setTimeout(() => { if (this.on && this.items.some(x => x.id === it.id)) this.make(it); }, 300 + Math.min(i, 16) * 300));
+      this.glitchT = setInterval(() => { if (this.drag) return; const a = [...this.els.values()], el = a[Math.floor(Math.random() * a.length)]; if (el) this.glitch(el); }, 900);
+    },
+    stop() {
+      this.on = false; clearInterval(this.glitchT); this.drag = null;
+      this.els.forEach(el => el.remove()); this.els.clear();
+    }
+  };
+
+  /* =========================================================
+     ROUTING (home → notebook → galaxy)
+  ========================================================= */
+  const views = { home: $('#home'), win: $('#win'), galaxy: $('#galaxy') };
+  const nb = $('#enterGalaxy');
+  let cur = null, gesture = false, openT = 0;
+  function show(name) {
+    if (name === 'galaxy' && !gesture) name = 'win';
+    if (cur === 'galaxy' && name !== 'galaxy') { Amb.stop(); Notes.stop(); Stars.stop(); }
+    clearTimeout(openT); nb.classList.remove('open');
+    Object.entries(views).forEach(([k, v]) => v.classList.toggle('active', k === name));
+    $('#app').dataset.v = name; $('#gramo').dataset.v = name;
+    if (name === 'galaxy') { views.galaxy.scrollTop = 0; Stars.start(); Notes.start(); Amb.start(); }
+    cur = name;
+  }
+  const route = () => { const h = location.hash.slice(1); show(h === 'window' ? 'win' : h === 'galaxy' ? 'galaxy' : 'home'); };
+  addEventListener('hashchange', route);
+
+  $('#enterWin').addEventListener('click', () => { AU.ensure(); location.hash = 'window'; });
+  nb.addEventListener('click', () => {
+    if (nb.classList.contains('open')) return;
+    gesture = true; AU.ensure(); nb.classList.add('open');
+    openT = setTimeout(() => { location.hash = 'galaxy'; }, reduced ? 30 : 1050);
+  });
+  document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => { location.hash = cur === 'galaxy' ? 'window' : 'home'; }));
+  addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    if (Menu.el.classList.contains('open')) return Menu.close();
+    if (Ed.el.classList.contains('open')) return Ed.close();
+    if (GUI.trayOpen) return GUI.toggleTray(false);
+    if (cur !== 'home') location.hash = cur === 'galaxy' ? 'window' : 'home';
+  });
+  $('#compose').addEventListener('submit', e => {
+    e.preventDefault(); const i = $('#noteIn'), v = i.value.trim(); if (!v) return; Notes.add(v); i.value = '';
+  });
+  let rt; addEventListener('resize', () => {
+    clearTimeout(rt); rt = setTimeout(() => { if (cur === 'galaxy') { Stars.resize(); Notes.layout(); Notes.place(); } }, 250);
+  });
+
+  Discs.ready.then(() => GUI.renderTray());
+  if (location.hash === '#galaxy') history.replaceState(null, '', '#window');
+  route();
+  window.__analog = { AU, Amb, Gram, GUI, Notes, Discs, DB, Ed };
+})();
+</script>
+
+</body></html>
